@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "@/components/layout/sidebar";
 import Topbar from "@/components/layout/topbar";
 import QueryProvider from "@/providers/query-provider";
+import { Toaster } from 'sonner';
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -32,6 +33,7 @@ export default function RootLayout({
             </main>
           </div>
         </QueryProvider>
+        <Toaster theme="dark" position="bottom-right" />
       </body>
     </html>
   );

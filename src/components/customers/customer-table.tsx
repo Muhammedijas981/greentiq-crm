@@ -10,12 +10,13 @@ interface CustomerTableProps {
   customers: Customer[];
   onEdit?: (customer: Customer) => void;
   onDelete?: (customer: Customer) => void;
+  onRowClick?: (customer: Customer) => void;
   sort?: string;
   order?: 'asc' | 'desc';
   onSort?: (field: string) => void;
 }
 
-export default function CustomerTable({ customers, onEdit, onDelete, sort, order, onSort }: CustomerTableProps) {
+export default function CustomerTable({ customers, onEdit, onDelete, onRowClick, sort, order, onSort }: CustomerTableProps) {
   const renderHeader = (field: string, label: string) => {
     const isSortable = ['name', 'email', 'lastContact'].includes(field);
     if (!isSortable) {
@@ -57,7 +58,11 @@ export default function CustomerTable({ customers, onEdit, onDelete, sort, order
           </thead>
           <tbody className="divide-y divide-slate-800/60">
             {customers.map((customer) => (
-              <tr key={customer.id} className="hover:bg-slate-800/30 transition-colors">
+              <tr 
+                key={customer.id} 
+                className="hover:bg-slate-800/30 transition-colors cursor-pointer"
+                onClick={() => onRowClick?.(customer)}
+              >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <CustomAvatar 
@@ -83,14 +88,14 @@ export default function CustomerTable({ customers, onEdit, onDelete, sort, order
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
                     <button 
-                      onClick={() => onEdit?.(customer)}
+                      onClick={(e) => { e.stopPropagation(); onEdit?.(customer); }}
                       className="p-1.5 text-slate-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-md transition-colors"
                       title="Edit Customer"
                     >
                       <Pencil size={16} />
                     </button>
                     <button 
-                      onClick={() => onDelete?.(customer)}
+                      onClick={(e) => { e.stopPropagation(); onDelete?.(customer); }}
                       className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-500/10 rounded-md transition-colors"
                       title="Delete Customer"
                     >

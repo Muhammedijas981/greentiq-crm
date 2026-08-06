@@ -31,13 +31,13 @@ export default function CustomerCard({ customer, onEdit, onDelete }: CustomerCar
         
         <div className="flex items-center gap-1">
           <button 
-            onClick={() => onEdit?.(customer)}
+            onClick={(e) => { e.stopPropagation(); onEdit?.(customer); }}
             className="p-2 text-slate-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-md transition-colors"
           >
             <Pencil size={18} />
           </button>
           <button 
-            onClick={() => onDelete?.(customer)}
+            onClick={(e) => { e.stopPropagation(); onDelete?.(customer); }}
             className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-500/10 rounded-md transition-colors"
           >
             <Trash2 size={18} />

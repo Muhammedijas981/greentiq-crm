@@ -24,8 +24,11 @@ import EmptyState from '@/components/shared/empty-state';
 
 export default function CustomersPage() {
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  
+  const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
 
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('name');
@@ -73,7 +76,7 @@ export default function CustomersPage() {
       <PageHeader 
         title="Customers" 
         action={
-          <Button onClick={() => setIsAddOpen(true)} className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+          <Button onClick={() => { setSelectedCustomer(null); setIsAddOpen(true); }} className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
             <Plus size={16} />
             Add Customer
           </Button>
@@ -120,7 +123,9 @@ export default function CustomersPage() {
           <div className="hidden md:block">
             <CustomerTable 
               customers={data.data} 
-              onEdit={() => setIsDetailOpen(true)}
+              onRowClick={(customer) => { setSelectedCustomer(customer); setIsDetailOpen(true); }}
+              onEdit={(customer) => { setSelectedCustomer(customer); setIsEditOpen(true); }}
+              onDelete={(customer) => { setSelectedCustomer(customer); setIsDetailOpen(true); }}
               sort={sort}
               order={order}
               onSort={handleSort}
@@ -130,7 +135,12 @@ export default function CustomersPage() {
           {/* Mobile Card View */}
           <div className="md:hidden flex flex-col gap-4">
             {data.data.map((customer: Customer) => (
-              <CustomerCard key={customer.id} customer={customer} onEdit={() => setIsDetailOpen(true)} />
+              <div key={customer.id} onClick={() => { setSelectedCustomer(customer); setIsDetailOpen(true); }}>
+                <CustomerCard 
+                  customer={customer} 
+                  onEdit={(c) => { setSelectedCustomer(c || customer); setIsEditOpen(true); }} 
+                />
+              </div>
             ))}
           </div>
           
@@ -142,8 +152,21 @@ export default function CustomersPage() {
         </>
       )}
 
-      {isAddOpen && <CustomerForm onClose={() => setIsAddOpen(false)} />}
-      {isDetailOpen && <CustomerDetailDrawer onClose={() => setIsDetailOpen(false)} />}
+      {isAddOpen && <CustomerForm onClose={() => setIsAddOpen(false)} mode="create" />}
+      {isEditOpen && selectedCustomer && (
+        <CustomerForm 
+          onClose={() => { setIsEditOpen(false); setSelectedCustomer(null); }} 
+          mode="edit" 
+          initialData={selectedCustomer} 
+        />
+      )}
+      {isDetailOpen && selectedCustomer && (
+        <CustomerDetailDrawer 
+          onClose={() => { setIsDetailOpen(false); setSelectedCustomer(null); }} 
+          customer={selectedCustomer}
+          onEdit={() => { setIsDetailOpen(false); setIsEditOpen(true); }}
+        />
+      )}
       {isFilterOpen && (
         <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm">
           <FilterPanel 
