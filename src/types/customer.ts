@@ -8,4 +8,6 @@ export interface Customer {
   company: string;
   status: CustomerStatus;
   lastContact: string;
+  createdDate: string;
+  notes?: string;
 }

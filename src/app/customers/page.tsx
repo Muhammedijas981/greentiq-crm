@@ -13,69 +13,41 @@ import { useState } from 'react';
 import CustomerForm from '@/components/customers/customer-form';
 import CustomerDetailDrawer from '@/components/customers/customer-detail-drawer';
 import FilterPanel from '@/components/filters/filter-panel';
+import { useCustomers } from '@/hooks/use-customers';
+import LoadingSkeleton from '@/components/shared/loading-skeleton';
+import EmptyState from '@/components/shared/empty-state';
 
 // Dummy data for Phase 5 (will be removed in Phase 8)
-const DUMMY_CUSTOMERS: Customer[] = [
-  {
-    id: '1',
-    name: 'Alice Green',
-    email: 'alicegreen@gmail.com',
-    phone: '874-748-8877',
-    company: 'Acme Corp',
-    status: 'Active',
-    lastContact: '2023-11-03T10:00:00Z',
-  },
-  {
-    id: '2',
-    name: 'Bob Ross',
-    email: 'bobross.coh@email.com',
-    phone: '874-855-2469',
-    company: 'Globex',
-    status: 'Active',
-    lastContact: '2023-11-03T11:30:00Z',
-  },
-  {
-    id: '3',
-    name: 'Charlie Davis',
-    email: 'charliedavis@email.com',
-    phone: '873-844-9576',
-    company: 'Stark Industries',
-    status: 'Archive',
-    lastContact: '2023-11-03T14:15:00Z',
-  },
-  {
-    id: '4',
-    name: 'Ebron Ross',
-    email: 'bobrIbonen@gmail.com',
-    phone: '874-883-2621',
-    company: 'Acme Corp',
-    status: 'Inactive',
-    lastContact: '2023-11-03T09:45:00Z',
-  },
-  {
-    id: '5',
-    name: 'John Ross',
-    email: 'alicext.lob@email.com',
-    phone: '879-833-8228',
-    company: 'Globex',
-    status: 'Lead',
-    lastContact: '2023-11-03T16:20:00Z',
-  },
-  {
-    id: '6',
-    name: 'Bolo Ross',
-    email: 'alicdendavis@gmail.com',
-    phone: '873-632-2337',
-    company: 'Stark Industries',
-    status: 'Prospect',
-    lastContact: '2023-11-03T15:00:00Z',
-  }
-];
+// Dummy data removed in Phase 7. Will be fetched via API in Phase 8.
 
 export default function CustomersPage() {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  // Filter & Pagination State
+  const [search, setSearch] = useState('');
+  const [status, setStatus] = useState('All');
+  const [page, setPage] = useState(1);
+  const limit = 10;
+
+  // Query Data
+  const { data, isLoading, isError, error } = useCustomers({
+    search,
+    status: status === 'All' ? undefined : status,
+    page,
+    limit,
+  });
+
+  const handleSearchChange = (val: string) => {
+    setSearch(val);
+    setPage(1); // Reset to first page on search
+  };
+
+  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setStatus(e.target.value);
+    setPage(1);
+  };
 
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto">
@@ -91,15 +63,24 @@ export default function CustomersPage() {
       
       <div className="bg-[#151a2a] border border-slate-800/60 rounded-xl p-4 md:p-6 shadow-sm mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
         <SearchBar 
-          value="" 
-          onChange={() => {}} 
+          value={search} 
+          onChange={handleSearchChange} 
           placeholder="Search customers..." 
           className="w-full sm:w-80" 
         />
         <div className="flex gap-2 w-full sm:w-auto">
           {/* Mock filters for visual layout */}
-          <select className="bg-[#1e293b] border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-300 w-full sm:w-auto focus:outline-none focus:ring-1 focus:ring-blue-500">
-            <option>Status: All</option>
+          <select 
+            value={status}
+            onChange={handleStatusChange}
+            className="bg-[#1e293b] border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-300 w-full sm:w-auto focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            <option value="All">Status: All</option>
+            <option value="Active Customer">Active</option>
+            <option value="Prospect">Prospect</option>
+            <option value="Lead">Lead</option>
+            <option value="Inactive Customer">Inactive</option>
+            <option value="Archive">Archive</option>
           </select>
           <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="border-slate-700 text-slate-300 hover:bg-slate-800">
             <Filter size={16} className="mr-2" />
@@ -108,23 +89,41 @@ export default function CustomersPage() {
         </div>
       </div>
 
-      {/* Desktop Table View */}
-      <div className="hidden md:block">
-        <CustomerTable customers={DUMMY_CUSTOMERS} onEdit={() => setIsDetailOpen(true)} />
-      </div>
+      {isLoading ? (
+        <div className="mt-4">
+          <LoadingSkeleton type="table-row" count={5} />
+        </div>
+      ) : isError ? (
+        <EmptyState 
+          title="Failed to load customers" 
+          description={error instanceof Error ? error.message : "Something went wrong"} 
+        />
+      ) : !data || data.data.length === 0 ? (
+        <EmptyState 
+          title="No customers found" 
+          description="Try adjusting your search or filters." 
+        />
+      ) : (
+        <>
+          {/* Desktop Table View */}
+          <div className="hidden md:block">
+            <CustomerTable customers={data.data} onEdit={() => setIsDetailOpen(true)} />
+          </div>
 
-      {/* Mobile Card View */}
-      <div className="md:hidden flex flex-col gap-4">
-        {DUMMY_CUSTOMERS.map(customer => (
-          <CustomerCard key={customer.id} customer={customer} onEdit={() => setIsDetailOpen(true)} />
-        ))}
-      </div>
-      
-      <Pagination 
-        currentPage={1} 
-        totalPages={15} 
-        onPageChange={() => {}} 
-      />
+          {/* Mobile Card View */}
+          <div className="md:hidden flex flex-col gap-4">
+            {data.data.map((customer: Customer) => (
+              <CustomerCard key={customer.id} customer={customer} onEdit={() => setIsDetailOpen(true)} />
+            ))}
+          </div>
+          
+          <Pagination 
+            currentPage={data.meta.page} 
+            totalPages={data.meta.totalPages} 
+            onPageChange={setPage} 
+          />
+        </>
+      )}
 
       {isAddOpen && <CustomerForm onClose={() => setIsAddOpen(false)} />}
       {isDetailOpen && <CustomerDetailDrawer onClose={() => setIsDetailOpen(false)} />}
