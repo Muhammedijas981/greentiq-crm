@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 import { mockStore } from '@/lib/mock-store';
+import { applyFilters } from '@/lib/filter-utils';
+import { FilterState } from '@/types/filter';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   
-  const search = searchParams.get('search')?.toLowerCase() || '';
+  const search = searchParams.get('search') || '';
   const status = searchParams.get('status') || '';
   const company = searchParams.get('company') || '';
+  const advancedFiltersRaw = searchParams.get('advancedFilters');
   const sort = searchParams.get('sort') || 'name'; // name, email, lastContact
   const order = searchParams.get('order') || 'asc';
   
@@ -15,21 +18,40 @@ export async function GET(request: Request) {
 
   let customers = mockStore.getAll();
 
-  // 1. Search (real-time search by name, email, or company as per PDF)
-  if (search) {
-    customers = customers.filter(c => 
-      c.name.toLowerCase().includes(search) || 
-      c.email.toLowerCase().includes(search) ||
-      c.company.toLowerCase().includes(search)
-    );
-  }
+  if (advancedFiltersRaw) {
+    try {
+      const filters = JSON.parse(advancedFiltersRaw) as FilterState;
+      customers = applyFilters(customers, search, filters);
+    } catch (e) {
+      console.error("Failed to parse advanced filters", e);
+      // fallback to just search if parsing fails
+      if (search) {
+        const s = search.toLowerCase();
+        customers = customers.filter(c => 
+          c.name.toLowerCase().includes(s) || 
+          c.email.toLowerCase().includes(s) ||
+          c.company.toLowerCase().includes(s)
+        );
+      }
+    }
+  } else {
+    // 1. Search (legacy fallback)
+    if (search) {
+      const s = search.toLowerCase();
+      customers = customers.filter(c => 
+        c.name.toLowerCase().includes(s) || 
+        c.email.toLowerCase().includes(s) ||
+        c.company.toLowerCase().includes(s)
+      );
+    }
 
-  // 2. Filter
-  if (status && status !== 'All') {
-    customers = customers.filter(c => c.status === status);
-  }
-  if (company && company !== 'All') {
-    customers = customers.filter(c => c.company === company);
+    // 2. Legacy Filters
+    if (status && status !== 'All') {
+      customers = customers.filter(c => c.status === status);
+    }
+    if (company && company !== 'All') {
+      customers = customers.filter(c => c.company === company);
+    }
   }
 
   // 3. Sort

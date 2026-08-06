@@ -9,11 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Plus, Filter } from 'lucide-react';
 import SearchBar from '@/components/layout/search-bar';
 import Pagination from '@/components/shared/pagination';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CustomerForm from '@/components/customers/customer-form';
 import CustomerDetailDrawer from '@/components/customers/customer-detail-drawer';
 import FilterPanel from '@/components/filters/filter-panel';
+import { useFilters } from '@/hooks/use-filters';
 import { useCustomers } from '@/hooks/use-customers';
+import { useDebounce } from '@/hooks/use-debounce';
 import LoadingSkeleton from '@/components/shared/loading-skeleton';
 import EmptyState from '@/components/shared/empty-state';
 
@@ -25,28 +27,45 @@ export default function CustomersPage() {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  // Filter & Pagination State
   const [search, setSearch] = useState('');
-  const [status, setStatus] = useState('All');
+  const [sort, setSort] = useState('name');
+  const [order, setOrder] = useState<'asc'|'desc'>('asc');
   const [page, setPage] = useState(1);
   const limit = 10;
 
+  const debouncedSearch = useDebounce(search, 300);
+  
+  // Advanced Filters
+  const { state: filterState, dispatch: filterDispatch, activeFilterCount } = useFilters();
+  const debouncedFilterState = useDebounce(filterState, 300);
+
+  // Reset page to 1 when filters or sort change
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch, debouncedFilterState, sort, order]);
+
   // Query Data
   const { data, isLoading, isError, error } = useCustomers({
-    search,
-    status: status === 'All' ? undefined : status,
+    search: debouncedSearch,
+    advancedFilters: JSON.stringify(debouncedFilterState),
+    sort,
+    order,
     page,
     limit,
   });
 
   const handleSearchChange = (val: string) => {
     setSearch(val);
-    setPage(1); // Reset to first page on search
   };
 
-  const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setStatus(e.target.value);
-    setPage(1);
+
+  const handleSort = (field: string) => {
+    if (sort === field) {
+      setOrder(order === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSort(field);
+      setOrder('asc');
+    }
   };
 
   return (
@@ -69,22 +88,14 @@ export default function CustomersPage() {
           className="w-full sm:w-80" 
         />
         <div className="flex gap-2 w-full sm:w-auto">
-          {/* Mock filters for visual layout */}
-          <select 
-            value={status}
-            onChange={handleStatusChange}
-            className="bg-[#1e293b] border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-300 w-full sm:w-auto focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            <option value="All">Status: All</option>
-            <option value="Active Customer">Active</option>
-            <option value="Prospect">Prospect</option>
-            <option value="Lead">Lead</option>
-            <option value="Inactive Customer">Inactive</option>
-            <option value="Archive">Archive</option>
-          </select>
-          <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="border-slate-700 text-slate-300 hover:bg-slate-800">
+          <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="border-slate-700 text-slate-300 hover:bg-slate-800 relative">
             <Filter size={16} className="mr-2" />
             Filters
+            {activeFilterCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md border-2 border-[#151a2a]">
+                {activeFilterCount}
+              </span>
+            )}
           </Button>
         </div>
       </div>
@@ -107,7 +118,13 @@ export default function CustomersPage() {
         <>
           {/* Desktop Table View */}
           <div className="hidden md:block">
-            <CustomerTable customers={data.data} onEdit={() => setIsDetailOpen(true)} />
+            <CustomerTable 
+              customers={data.data} 
+              onEdit={() => setIsDetailOpen(true)}
+              sort={sort}
+              order={order}
+              onSort={handleSort}
+            />
           </div>
 
           {/* Mobile Card View */}
@@ -129,7 +146,11 @@ export default function CustomersPage() {
       {isDetailOpen && <CustomerDetailDrawer onClose={() => setIsDetailOpen(false)} />}
       {isFilterOpen && (
         <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm">
-          <FilterPanel onClose={() => setIsFilterOpen(false)} />
+          <FilterPanel 
+            onClose={() => setIsFilterOpen(false)} 
+            state={filterState}
+            dispatch={filterDispatch}
+          />
         </div>
       )}
     </div>

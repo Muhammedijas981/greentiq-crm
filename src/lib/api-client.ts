@@ -1,4 +1,5 @@
 import { Customer } from '@/types/customer';
+import { SavedFilter, FilterState } from '@/types/filter';
 
 export interface PaginatedResponse<T> {
   data: T[];
@@ -12,8 +13,9 @@ export interface PaginatedResponse<T> {
 
 export interface GetCustomersParams {
   search?: string;
-  status?: string;
+  status?: string; // Legacy simple filter (can be removed if advanced replaces it, but kept for compatibility)
   company?: string;
+  advancedFilters?: string; // JSON string of FilterState
   sort?: string;
   order?: 'asc' | 'desc';
   page?: number;
@@ -67,5 +69,22 @@ export const apiClient = {
       method: 'DELETE',
     });
     if (!response.ok) throw new Error('Failed to delete customer');
+  },
+
+  // Saved Filters
+  getSavedFilters: async (): Promise<SavedFilter[]> => {
+    const response = await fetch('/api/saved-filters');
+    if (!response.ok) throw new Error('Failed to fetch saved filters');
+    return response.json();
+  },
+
+  createSavedFilter: async (name: string, state: FilterState): Promise<SavedFilter> => {
+    const response = await fetch('/api/saved-filters', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, state }),
+    });
+    if (!response.ok) throw new Error('Failed to create saved filter');
+    return response.json();
   }
 };
