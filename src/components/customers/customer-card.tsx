@@ -60,7 +60,7 @@ export default function CustomerCard({ customer, onEdit, onDelete }: CustomerCar
         </div>
         <div className="flex items-center gap-2 text-slate-400 mt-1">
           <Calendar size={14} className="text-slate-500" />
-          <span>Last contact: {new Date(customer.lastContact).toLocaleDateString()}</span>
+          <span>Last contact: {new Date(customer.lastContact).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
         </div>
       </div>
     </div>
