@@ -5,6 +5,7 @@ import FilterStatus from './filter-status';
 import FilterCompany from './filter-company';
 import FilterDateRange from './filter-date-range';
 import FilterText from './filter-text';
+import SavedFiltersList from './saved-filters-list';
 import { FilterAction } from '@/hooks/use-filters';
 import { FilterState } from '@/types/filter';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -131,19 +132,10 @@ export default function FilterPanel({ onClose, state, dispatch }: FilterPanelPro
         {/* Saved Filters */}
         <div className="space-y-3 pt-4 border-t border-slate-800/60">
           <h3 className="text-sm font-medium text-slate-100">Saved Filters</h3>
-          <ul className="space-y-1">
-            {savedFilters.map((filter) => (
-              <li key={filter.id}>
-                <button 
-                  onClick={() => dispatch({ type: 'APPLY_SAVED_FILTER', payload: filter.state })}
-                  className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm text-slate-300 hover:bg-slate-800/50 hover:text-slate-100 transition-colors group"
-                >
-                  <span>{filter.name}</span>
-                  {!filter.isTemplate && <Star size={14} className="text-slate-500 group-hover:text-blue-400" />}
-                </button>
-              </li>
-            ))}
-          </ul>
+          <SavedFiltersList 
+            filters={savedFilters} 
+            onApply={(state) => dispatch({ type: 'APPLY_SAVED_FILTER', payload: state })}
+          />
         </div>
       </div>
     </div>

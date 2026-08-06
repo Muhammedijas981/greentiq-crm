@@ -86,5 +86,15 @@ export const apiClient = {
     });
     if (!response.ok) throw new Error('Failed to create saved filter');
     return response.json();
+  },
+
+  async reorderSavedFilters(startIndex: number, endIndex: number) {
+    const response = await fetch('/api/saved-filters/reorder', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ startIndex, endIndex }),
+    });
+    if (!response.ok) throw new Error('Failed to reorder saved filters');
+    return response.json();
   }
 };
