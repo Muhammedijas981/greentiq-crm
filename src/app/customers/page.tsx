@@ -15,6 +15,7 @@ import CustomerDetailDrawer from '@/components/customers/customer-detail-drawer'
 import FilterPanel from '@/components/filters/filter-panel';
 import { useFilters } from '@/hooks/use-filters';
 import { useCustomers } from '@/hooks/use-customers';
+import { useKeyboardShortcut } from '@/hooks/use-keyboard-shortcut';
 import { useDebounce } from '@/hooks/use-debounce';
 import LoadingSkeleton from '@/components/shared/loading-skeleton';
 import EmptyState from '@/components/shared/empty-state';
@@ -87,6 +88,20 @@ export default function CustomersPage() {
   // Advanced Filters
   const { state: filterState, dispatch: filterDispatch, activeFilterCount } = useFilters();
   const debouncedFilterState = useDebounce(filterState, 300);
+
+  // Keyboard Shortcuts
+  useKeyboardShortcut('cmd-k', () => {
+    setIsFilterOpen(true);
+  });
+
+  useKeyboardShortcut('escape', () => {
+    // Close the topmost open modal/drawer
+    if (isBulkDeleteOpen) setIsBulkDeleteOpen(false);
+    else if (isFilterOpen) setIsFilterOpen(false);
+    else if (isDetailOpen) setIsDetailOpen(false);
+    else if (isEditOpen) setIsEditOpen(false);
+    else if (isAddOpen) setIsAddOpen(false);
+  });
 
   // Reset page to 1 when filters or sort change
   useEffect(() => {
@@ -270,8 +285,11 @@ export default function CustomersPage() {
           <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="h-9 border-border text-muted-foreground hover:bg-muted relative">
             <Filter size={16} className="mr-2" />
             Filters
+            <kbd className="ml-2 hidden sm:inline-flex h-5 items-center gap-1 rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+              <span className="text-xs">⌘</span>K
+            </kbd>
             {activeFilterCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-blue-600 text-foreground text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md border-2 border-[#151a2a]">
+              <span className="absolute -top-2 -right-2 bg-blue-600 text-foreground text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md border-2 border-background">
                 {activeFilterCount}
               </span>
             )}
