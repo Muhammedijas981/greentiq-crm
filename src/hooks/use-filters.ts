@@ -4,6 +4,8 @@ import { FilterState } from '@/types/filter';
 export type FilterAction =
   | { type: 'TOGGLE_STATUS'; payload: string }
   | { type: 'TOGGLE_COMPANY'; payload: string }
+  | { type: 'SET_STATUS_EXACT'; payload: string[] }
+  | { type: 'SET_COMPANY_EXACT'; payload: string[] }
   | { type: 'SET_DATE_RANGE'; payload: { from: string; to: string } }
   | { type: 'SET_PHONE'; payload: string }
   | { type: 'SET_EMAIL'; payload: string }
@@ -38,6 +40,10 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
           : [...state.company, action.payload]
       };
     }
+    case 'SET_STATUS_EXACT':
+      return { ...state, status: action.payload };
+    case 'SET_COMPANY_EXACT':
+      return { ...state, company: action.payload };
     case 'SET_DATE_RANGE':
       return { ...state, dateRange: action.payload };
     case 'SET_PHONE':
