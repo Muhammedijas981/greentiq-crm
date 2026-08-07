@@ -56,27 +56,27 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="w-full max-w-lg bg-[#151a2a] border border-slate-800 rounded-xl shadow-2xl flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+      <div className="w-full max-w-[480px] bg-[#151a2a] border border-slate-800 rounded-xl shadow-2xl flex flex-col my-auto">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800/60">
-          <h2 className="text-xl font-semibold text-slate-100">{mode === 'create' ? 'Add Customer' : 'Edit Customer'}</h2>
+        <div className="flex items-center justify-between px-5 py-3 border-b border-slate-800/60">
+          <h2 className="text-lg font-medium text-slate-100">{mode === 'create' ? 'Add Customer' : 'Edit Customer'}</h2>
           <button onClick={onClose} disabled={isPending} className="text-slate-400 hover:text-white transition-colors">
             <X size={20} />
           </button>
         </div>
 
         {/* Body */}
-        <form id="customer-form" onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-5 overflow-y-auto max-h-[80vh] scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+        <form id="customer-form" onSubmit={handleSubmit(onSubmit)} className="px-5 py-4 space-y-3">
           
           {/* Name */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label className="text-sm text-slate-300">Name <span className="text-slate-500">*</span></label>
             <div className="relative">
               <input 
                 type="text" 
                 {...register('name')}
-                className={`w-full bg-[#0a0f1c] border rounded-lg py-2.5 pl-3 pr-10 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+                className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 pl-3 pr-10 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.name ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
               />
               {!errors.name && <CheckCircle2 size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500 opacity-50" />}
             </div>
@@ -84,13 +84,13 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
           </div>
 
           {/* Email */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label className="text-sm text-slate-300">Email <span className="text-slate-500">*</span></label>
             <div className="relative">
               <input 
                 type="email" 
                 {...register('email')}
-                className={`w-full bg-[#0a0f1c] border rounded-lg py-2.5 pl-3 pr-10 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+                className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 pl-3 pr-10 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
               />
               {!errors.email && <CheckCircle2 size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-green-500 opacity-50" />}
             </div>
@@ -98,35 +98,35 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
           </div>
 
           {/* Phone */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label className="text-sm text-slate-300">Phone <span className="text-slate-500">*</span></label>
             <input 
               type="tel" 
               {...register('phone')}
-              className={`w-full bg-[#0a0f1c] border rounded-lg py-2.5 px-3 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+              className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 px-3 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.phone ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
             />
             {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
           </div>
 
           {/* Company */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label className="text-sm text-slate-300">Company <span className="text-slate-500">*</span></label>
             <input 
               type="text" 
               {...register('company')}
-              className={`w-full bg-[#0a0f1c] border rounded-lg py-2.5 px-3 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.company ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+              className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 px-3 text-sm text-slate-200 focus:outline-none focus:ring-1 ${errors.company ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
             />
             {errors.company && <p className="text-xs text-red-500">{errors.company.message}</p>}
           </div>
 
           {/* Status & Date pair */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="space-y-1.5 flex-1">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <div className="space-y-1 flex-1">
               <label className="text-sm text-slate-300">Status</label>
               <div className="relative">
                 <select 
                   {...register('status')}
-                  className={`w-full bg-[#0a0f1c] border rounded-lg py-2.5 pl-3 pr-10 text-sm text-slate-200 appearance-none focus:outline-none focus:ring-1 ${errors.status ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+                  className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 pl-3 pr-10 text-sm text-slate-200 appearance-none focus:outline-none focus:ring-1 ${errors.status ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
                 >
                   <option value="Active Customer">Active Customer</option>
                   <option value="Prospect">Prospect</option>
@@ -138,13 +138,13 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
               </div>
               {errors.status && <p className="text-xs text-red-500">{errors.status.message}</p>}
             </div>
-            <div className="space-y-1.5 flex-1">
+            <div className="space-y-1 flex-1">
               <label className="text-sm text-slate-300">Last Contact Date <span className="text-slate-500">*</span></label>
               <div className="relative">
                 <input 
                   type="date" 
                   {...register('lastContact')}
-                  className={`w-full bg-[#0a0f1c] border rounded-lg py-2.5 pl-10 pr-3 text-sm text-slate-200 focus:outline-none focus:ring-1 [color-scheme:dark] ${errors.lastContact ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+                  className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 pl-9 pr-3 text-sm text-slate-200 focus:outline-none focus:ring-1 [color-scheme:dark] ${errors.lastContact ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
                 />
                 <Calendar size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
               </div>
@@ -153,12 +153,12 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
           </div>
 
           {/* Notes */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <label className="text-sm text-slate-300">Notes</label>
             <textarea 
-              rows={4}
+              rows={3}
               {...register('notes')}
-              className={`w-full bg-[#0a0f1c] border rounded-lg py-3 px-3 text-sm text-slate-200 focus:outline-none focus:ring-1 resize-none ${errors.notes ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
+              className={`w-full bg-[#0a0f1c] border rounded-lg py-1.5 px-3 text-sm text-slate-200 focus:outline-none focus:ring-1 resize-none ${errors.notes ? 'border-red-500 focus:border-red-500 focus:ring-red-500/50' : 'border-slate-700/50 focus:border-blue-500 focus:ring-blue-500/50'}`}
             />
             {errors.notes && <p className="text-xs text-red-500">{errors.notes.message}</p>}
           </div>
@@ -166,11 +166,11 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
         </form>
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-800/60 bg-[#1e293b]/30 rounded-b-xl">
-          <Button variant="ghost" onClick={onClose} disabled={isPending} className="text-slate-300 hover:text-white hover:bg-slate-800">
+        <div className="flex items-center justify-end gap-3 px-5 py-3 border-t border-slate-800/60 bg-[#1e293b]/30 rounded-b-xl">
+          <Button variant="ghost" onClick={onClose} disabled={isPending} className="text-sm h-8 text-slate-300 hover:text-white hover:bg-slate-800">
             Cancel
           </Button>
-          <Button type="submit" form="customer-form" disabled={isPending} className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]">
+          <Button type="submit" form="customer-form" disabled={isPending} className="text-sm h-8 bg-blue-600 hover:bg-blue-700 text-white min-w-[100px]">
             {isPending ? <Loader2 className="animate-spin w-4 h-4" /> : (mode === 'create' ? 'Add Customer' : 'Save Changes')}
           </Button>
         </div>

@@ -18,6 +18,7 @@ export default function CustomerCard({ customer, onEdit, onDelete }: CustomerCar
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
           <CustomAvatar 
+            name={customer.name}
             fallback={customer.name.substring(0, 2).toUpperCase()} 
             className="w-10 h-10 rounded-full" 
           />

@@ -23,6 +23,8 @@ export default function DashboardPage() {
         <StatCard 
           title="Total Customers"
           value={stats?.totalCustomers.toLocaleString() || "0"}
+          trend="+3.2%"
+          trendUp={true}
           icon={<Users size={20} />}
           iconBg="bg-blue-500/10"
           iconColor="text-blue-500"
@@ -30,6 +32,8 @@ export default function DashboardPage() {
         <StatCard 
           title="Active Leads"
           value={stats?.activeLeads.toLocaleString() || "0"}
+          trend="+5.8%"
+          trendUp={true}
           icon={<Rocket size={20} />}
           iconBg="bg-orange-500/10"
           iconColor="text-orange-500"
@@ -37,6 +41,8 @@ export default function DashboardPage() {
         <StatCard 
           title="Contacted This Week"
           value={stats?.contactedThisWeek.toLocaleString() || "0"}
+          trend="-1.5%"
+          trendUp={false}
           icon={<Phone size={20} />}
           iconBg="bg-pink-500/10"
           iconColor="text-pink-500"

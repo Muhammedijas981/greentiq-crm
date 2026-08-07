@@ -66,6 +66,7 @@ export default function CustomerTable({ customers, onEdit, onDelete, onRowClick,
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <CustomAvatar 
+                      name={customer.name}
                       fallback={customer.name.substring(0, 2).toUpperCase()} 
                       className="w-8 h-8 rounded-full text-xs" 
                     />

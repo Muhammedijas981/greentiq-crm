@@ -21,35 +21,32 @@ export default function FilterCompany({ selectedCompanies, onChange }: FilterCom
 
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-medium text-slate-100">Company</h3>
+      <h3 className="text-sm font-semibold text-slate-200">Company</h3>
       
-      {selectedCompanies.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {selectedCompanies.map(c => (
-            <span key={c} className="inline-flex items-center gap-1 px-3 py-1 bg-slate-800 text-slate-300 text-xs rounded-full">
-              {c}
-              <button 
-                onClick={() => onChange(c)}
-                className="hover:text-white transition-colors"
-              >
-                <X size={12} />
-              </button>
-            </span>
-          ))}
+      <div className="relative flex flex-wrap gap-1.5 p-1.5 bg-[#151a2a] border border-slate-700/50 rounded-lg min-h-[40px] items-center">
+        {selectedCompanies.map(c => (
+          <span key={c} className="inline-flex items-center gap-1 px-2 py-0.5 bg-slate-700 text-slate-200 text-xs rounded-md">
+            {c}
+            <button 
+              onClick={() => onChange(c)}
+              className="hover:text-white transition-colors"
+            >
+              <X size={12} />
+            </button>
+          </span>
+        ))}
+        <div className="flex-1 min-w-[80px] flex items-center relative">
+          <input 
+            type="text" 
+            placeholder="Add..." 
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onFocus={() => setIsOpen(true)}
+            onBlur={() => setTimeout(() => setIsOpen(false), 200)}
+            className="w-full bg-transparent text-sm text-slate-200 focus:outline-none pr-6 pl-1"
+          />
+          <ChevronDown size={14} className="absolute right-1 text-slate-500 pointer-events-none" />
         </div>
-      )}
-
-      <div className="relative">
-        <input 
-          type="text" 
-          placeholder="Add..." 
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          onFocus={() => setIsOpen(true)}
-          onBlur={() => setTimeout(() => setIsOpen(false), 200)}
-          className="w-full bg-transparent border-b border-slate-700 py-1 text-sm text-slate-200 focus:outline-none focus:border-blue-500"
-        />
-        <ChevronDown size={14} className="absolute right-0 top-2 text-slate-500" />
         
         {isOpen && filteredOptions.length > 0 && (
           <div className="absolute z-10 w-full mt-1 bg-slate-800 border border-slate-700 rounded-md shadow-lg max-h-40 overflow-y-auto">
