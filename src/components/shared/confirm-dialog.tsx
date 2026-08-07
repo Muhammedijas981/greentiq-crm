@@ -30,17 +30,17 @@ export default function ConfirmDialog({
 }: ConfirmDialogProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-[#0a0f1c] border-slate-800 text-slate-200">
+      <DialogContent className="sm:max-w-[425px] bg-background border-border text-foreground">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription className="text-slate-400">
+          <DialogDescription className="text-muted-foreground">
             {description}
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="mt-4 flex gap-3 sm:gap-3">
           <button
             onClick={() => onOpenChange(false)}
-            className="h-8 px-3 text-sm font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-colors"
+            className="h-8 px-3 text-sm font-medium text-muted-foreground hover:text-foreground bg-muted hover:bg-muted/80 rounded-md transition-colors"
           >
             {cancelLabel}
           </button>
@@ -49,7 +49,7 @@ export default function ConfirmDialog({
               onConfirm();
               onOpenChange(false);
             }}
-            className={`h-8 px-3 text-sm font-medium text-white rounded-md transition-colors ${
+            className={`h-8 px-3 text-sm font-medium text-foreground rounded-md transition-colors ${
               variant === 'danger' 
                 ? 'bg-red-600 hover:bg-red-700' 
                 : 'bg-blue-600 hover:bg-blue-700'

@@ -53,5 +53,17 @@ export const mockStore = {
     
     customers.splice(index, 1);
     return true;
+  },
+
+  bulkUpdate: (ids: string[], data: Partial<Customer>) => {
+    customers = customers.map(c => 
+      ids.includes(c.id) ? { ...c, ...data } : c
+    );
+    return true;
+  },
+
+  bulkRemove: (ids: string[]) => {
+    customers = customers.filter(c => !ids.includes(c.id));
+    return true;
   }
 };

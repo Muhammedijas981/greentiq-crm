@@ -5,7 +5,7 @@
     "email": "taylor.johnson@company.com",
     "phone": "+1 (549) 262-6866",
     "company": "Pied Piper",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-27T08:49:37.758Z",
     "createdDate": "2026-02-26T08:49:37.758Z",
     "notes": "Generated notes for Taylor Johnson"
@@ -27,7 +27,7 @@
     "email": "rachel.lopez@company.com",
     "phone": "+1 (364) 959-8361",
     "company": "Aperture Science",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-07-28T08:49:37.767Z",
     "createdDate": "2026-07-18T08:49:37.767Z",
     "notes": "Generated notes for Rachel Lopez"
@@ -38,7 +38,7 @@
     "email": "liam.taylor@example.com",
     "phone": "+1 (975) 741-5897",
     "company": "Oscorp",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-28T08:49:37.767Z",
     "createdDate": "2026-05-12T08:49:37.767Z",
     "notes": "Generated notes for Liam Taylor"
@@ -49,7 +49,7 @@
     "email": "bob.taylor@company.com",
     "phone": "+1 (431) 498-9455",
     "company": "Aperture Science",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-05T08:49:37.767Z",
     "createdDate": "2025-09-02T08:49:37.767Z",
     "notes": "Generated notes for Bob Taylor"
@@ -82,7 +82,7 @@
     "email": "xander.moore@example.com",
     "phone": "+1 (395) 405-1268",
     "company": "Stark Industries",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-05T08:49:37.767Z",
     "createdDate": "2026-02-02T08:49:37.767Z",
     "notes": "Generated notes for Xander Moore"
@@ -115,7 +115,7 @@
     "email": "henry.smith@hotmail.com",
     "phone": "+1 (590) 595-6533",
     "company": "Globex",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-14T08:49:37.767Z",
     "createdDate": "2026-01-25T08:49:37.767Z",
     "notes": "Generated notes for Henry Smith"
@@ -126,7 +126,7 @@
     "email": "alice.williams@gmail.com",
     "phone": "+1 (612) 482-6903",
     "company": "Hooli",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-08-03T08:49:37.767Z",
     "createdDate": "2026-04-18T08:49:37.767Z",
     "notes": "Generated notes for Alice Williams"
@@ -159,7 +159,7 @@
     "email": "yara.rodriguez@example.com",
     "phone": "+1 (476) 479-7470",
     "company": "Globex",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-07T08:49:37.767Z",
     "createdDate": "2026-04-29T08:49:37.767Z",
     "notes": "Generated notes for Yara Rodriguez"
@@ -192,7 +192,7 @@
     "email": "noah.jones@company.com",
     "phone": "+1 (387) 443-1582",
     "company": "Dunder Mifflin",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-05T08:49:37.767Z",
     "createdDate": "2026-01-27T08:49:37.767Z",
     "notes": "Generated notes for Noah Jones"
@@ -236,7 +236,7 @@
     "email": "charlie.davis@gmail.com",
     "phone": "+1 (507) 982-4414",
     "company": "Umbrella Corp",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-15T08:49:37.768Z",
     "createdDate": "2026-01-31T08:49:37.768Z",
     "notes": "Generated notes for Charlie Davis"
@@ -247,7 +247,7 @@
     "email": "charlie.jones@yahoo.com",
     "phone": "+1 (369) 991-1982",
     "company": "Hooli",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-07T08:49:37.768Z",
     "createdDate": "2026-03-31T08:49:37.768Z",
     "notes": "Generated notes for Charlie Jones"
@@ -258,7 +258,7 @@
     "email": "henry.hernandez@company.com",
     "phone": "+1 (739) 394-5236",
     "company": "Soylent Corp",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-07-08T08:49:37.768Z",
     "createdDate": "2025-11-15T08:49:37.768Z",
     "notes": "Generated notes for Henry Hernandez"
@@ -335,7 +335,7 @@
     "email": "sam.rodriguez@gmail.com",
     "phone": "+1 (852) 313-9805",
     "company": "Initech",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-19T08:49:37.768Z",
     "createdDate": "2026-02-23T08:49:37.768Z",
     "notes": "Generated notes for Sam Rodriguez"
@@ -357,7 +357,7 @@
     "email": "henry.martinez@yahoo.com",
     "phone": "+1 (676) 981-3088",
     "company": "Aperture Science",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-05T08:49:37.768Z",
     "createdDate": "2026-01-24T08:49:37.768Z",
     "notes": "Generated notes for Henry Martinez"
@@ -368,7 +368,7 @@
     "email": "peter.miller@yahoo.com",
     "phone": "+1 (370) 731-3677",
     "company": "Aperture Science",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-27T08:49:37.768Z",
     "createdDate": "2025-10-30T08:49:37.768Z",
     "notes": "Generated notes for Peter Miller"
@@ -379,7 +379,7 @@
     "email": "charlie.johnson@hotmail.com",
     "phone": "+1 (373) 886-3516",
     "company": "Initech",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-17T08:49:37.768Z",
     "createdDate": "2025-10-13T08:49:37.768Z",
     "notes": "Generated notes for Charlie Johnson"
@@ -412,7 +412,7 @@
     "email": "uma.taylor@yahoo.com",
     "phone": "+1 (532) 248-8778",
     "company": "Pied Piper",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-04T08:49:37.768Z",
     "createdDate": "2026-05-10T08:49:37.768Z",
     "notes": "Generated notes for Uma Taylor"
@@ -445,7 +445,7 @@
     "email": "wendy.williams@company.com",
     "phone": "+1 (272) 281-1439",
     "company": "Umbrella Corp",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-04-30T08:49:37.768Z",
     "createdDate": "2026-04-19T08:49:37.768Z",
     "notes": "Generated notes for Wendy Williams"
@@ -456,7 +456,7 @@
     "email": "jack.hernandez@yahoo.com",
     "phone": "+1 (669) 880-2251",
     "company": "Acme Corp",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-09T08:49:37.768Z",
     "createdDate": "2025-09-12T08:49:37.768Z",
     "notes": "Generated notes for Jack Hernandez"
@@ -478,7 +478,7 @@
     "email": "henry.garcia@yahoo.com",
     "phone": "+1 (808) 566-1961",
     "company": "Acme Corp",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-20T08:49:37.768Z",
     "createdDate": "2026-05-22T08:49:37.768Z",
     "notes": "Generated notes for Henry Garcia"
@@ -489,7 +489,7 @@
     "email": "xander.martin@gmail.com",
     "phone": "+1 (251) 686-2606",
     "company": "Stark Industries",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-04-29T08:49:37.768Z",
     "createdDate": "2025-08-03T08:49:37.768Z",
     "notes": "Generated notes for Xander Martin"
@@ -522,7 +522,7 @@
     "email": "mia.garcia@yahoo.com",
     "phone": "+1 (533) 850-7708",
     "company": "Stark Industries",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-08-04T08:49:37.768Z",
     "createdDate": "2025-11-23T08:49:37.768Z",
     "notes": "Generated notes for Mia Garcia"
@@ -533,7 +533,7 @@
     "email": "victor.williams@gmail.com",
     "phone": "+1 (908) 265-7125",
     "company": "Hooli",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-26T08:49:37.768Z",
     "createdDate": "2026-06-16T08:49:37.768Z",
     "notes": "Generated notes for Victor Williams"
@@ -555,7 +555,7 @@
     "email": "liam.thomas@company.com",
     "phone": "+1 (853) 677-1207",
     "company": "Initech",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-09T08:49:37.768Z",
     "createdDate": "2025-09-24T08:49:37.768Z",
     "notes": "Generated notes for Liam Thomas"
@@ -588,7 +588,7 @@
     "email": "alice.martin@company.com",
     "phone": "+1 (898) 200-5942",
     "company": "Massive Dynamic",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-22T08:49:37.768Z",
     "createdDate": "2025-11-10T08:49:37.768Z",
     "notes": "Generated notes for Alice Martin"
@@ -687,7 +687,7 @@
     "email": "diana.martin@example.com",
     "phone": "+1 (626) 691-5182",
     "company": "Soylent Corp",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-28T08:49:37.768Z",
     "createdDate": "2025-09-15T08:49:37.768Z",
     "notes": "Generated notes for Diana Martin"
@@ -698,7 +698,7 @@
     "email": "diana.jackson@yahoo.com",
     "phone": "+1 (930) 883-9493",
     "company": "Stark Industries",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-20T08:49:37.768Z",
     "createdDate": "2025-10-21T08:49:37.768Z",
     "notes": "Generated notes for Diana Jackson"
@@ -709,7 +709,7 @@
     "email": "quinn.jones@example.com",
     "phone": "+1 (318) 741-5388",
     "company": "Hooli",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-29T08:49:37.768Z",
     "createdDate": "2026-01-14T08:49:37.768Z",
     "notes": "Generated notes for Quinn Jones"
@@ -731,7 +731,7 @@
     "email": "victor.rodriguez@hotmail.com",
     "phone": "+1 (836) 894-9322",
     "company": "Globex",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-14T08:49:37.768Z",
     "createdDate": "2025-09-14T08:49:37.768Z",
     "notes": "Generated notes for Victor Rodriguez"
@@ -742,7 +742,7 @@
     "email": "xander.johnson@example.com",
     "phone": "+1 (811) 650-4984",
     "company": "Pied Piper",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-13T08:49:37.768Z",
     "createdDate": "2025-12-24T08:49:37.768Z",
     "notes": "Generated notes for Xander Johnson"
@@ -775,7 +775,7 @@
     "email": "sam.smith@example.com",
     "phone": "+1 (538) 932-5232",
     "company": "Dunder Mifflin",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-03T08:49:37.768Z",
     "createdDate": "2026-05-26T08:49:37.768Z",
     "notes": "Generated notes for Sam Smith"
@@ -819,7 +819,7 @@
     "email": "sam.lopez@yahoo.com",
     "phone": "+1 (764) 262-2083",
     "company": "Globex",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-31T08:49:37.768Z",
     "createdDate": "2026-06-03T08:49:37.768Z",
     "notes": "Generated notes for Sam Lopez"
@@ -852,7 +852,7 @@
     "email": "liam.smith@yahoo.com",
     "phone": "+1 (645) 514-9500",
     "company": "Aperture Science",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-09T08:49:37.768Z",
     "createdDate": "2026-01-09T08:49:37.768Z",
     "notes": "Generated notes for Liam Smith"
@@ -863,7 +863,7 @@
     "email": "olivia.garcia@hotmail.com",
     "phone": "+1 (551) 309-9660",
     "company": "Stark Industries",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-06T08:49:37.768Z",
     "createdDate": "2025-10-14T08:49:37.768Z",
     "notes": "Generated notes for Olivia Garcia"
@@ -874,7 +874,7 @@
     "email": "quinn.moore@example.com",
     "phone": "+1 (726) 460-2466",
     "company": "Dunder Mifflin",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-26T08:49:37.768Z",
     "createdDate": "2025-11-26T08:49:37.768Z",
     "notes": "Generated notes for Quinn Moore"
@@ -896,7 +896,7 @@
     "email": "grace.garcia@gmail.com",
     "phone": "+1 (387) 472-2338",
     "company": "Pied Piper",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-07-29T08:49:37.768Z",
     "createdDate": "2026-01-14T08:49:37.768Z",
     "notes": "Generated notes for Grace Garcia"
@@ -918,7 +918,7 @@
     "email": "yara.martinez@example.com",
     "phone": "+1 (359) 650-7240",
     "company": "Hooli",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-08-02T08:49:37.768Z",
     "createdDate": "2026-02-17T08:49:37.768Z",
     "notes": "Generated notes for Yara Martinez"
@@ -1017,7 +1017,7 @@
     "email": "alice.jackson@yahoo.com",
     "phone": "+1 (663) 460-9193",
     "company": "Stark Industries",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-23T08:49:37.768Z",
     "createdDate": "2026-04-22T08:49:37.768Z",
     "notes": "Generated notes for Alice Jackson"
@@ -1028,7 +1028,7 @@
     "email": "victor.rodriguez@hotmail.com",
     "phone": "+1 (396) 720-6482",
     "company": "Globex",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-07-19T08:49:37.768Z",
     "createdDate": "2026-02-19T08:49:37.768Z",
     "notes": "Generated notes for Victor Rodriguez"
@@ -1050,7 +1050,7 @@
     "email": "jack.miller@example.com",
     "phone": "+1 (308) 960-4045",
     "company": "Initech",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-09T08:49:37.768Z",
     "createdDate": "2025-10-08T08:49:37.768Z",
     "notes": "Generated notes for Jack Miller"
@@ -1061,7 +1061,7 @@
     "email": "peter.lopez@gmail.com",
     "phone": "+1 (228) 703-1273",
     "company": "Wayne Enterprises",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-17T08:49:37.768Z",
     "createdDate": "2026-02-26T08:49:37.768Z",
     "notes": "Generated notes for Peter Lopez"
@@ -1127,7 +1127,7 @@
     "email": "jack.davis@company.com",
     "phone": "+1 (715) 577-5119",
     "company": "Dunder Mifflin",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-26T08:49:37.768Z",
     "createdDate": "2026-02-12T08:49:37.768Z",
     "notes": "Generated notes for Jack Davis"
@@ -1149,7 +1149,7 @@
     "email": "olivia.brown@example.com",
     "phone": "+1 (642) 538-9895",
     "company": "Aperture Science",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-28T08:49:37.768Z",
     "createdDate": "2025-10-30T08:49:37.768Z",
     "notes": "Generated notes for Olivia Brown"
@@ -1182,7 +1182,7 @@
     "email": "rachel.hernandez@hotmail.com",
     "phone": "+1 (386) 747-6812",
     "company": "Pied Piper",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-25T08:49:37.768Z",
     "createdDate": "2025-08-19T08:49:37.768Z",
     "notes": "Generated notes for Rachel Hernandez"
@@ -1193,7 +1193,7 @@
     "email": "frank.martinez@company.com",
     "phone": "+1 (294) 750-4217",
     "company": "Aperture Science",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-06T08:49:37.768Z",
     "createdDate": "2025-12-21T08:49:37.768Z",
     "notes": "Generated notes for Frank Martinez"
@@ -1248,7 +1248,7 @@
     "email": "charlie.smith@yahoo.com",
     "phone": "+1 (845) 785-9757",
     "company": "Dunder Mifflin",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-04T08:49:37.768Z",
     "createdDate": "2025-08-15T08:49:37.768Z",
     "notes": "Generated notes for Charlie Smith"
@@ -1259,7 +1259,7 @@
     "email": "taylor.rodriguez@hotmail.com",
     "phone": "+1 (730) 416-3135",
     "company": "Stark Industries",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-07T08:49:37.768Z",
     "createdDate": "2026-04-18T08:49:37.768Z",
     "notes": "Generated notes for Taylor Rodriguez"
@@ -1270,7 +1270,7 @@
     "email": "peter.anderson@example.com",
     "phone": "+1 (928) 599-4893",
     "company": "Cyberdyne",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-07T08:49:37.768Z",
     "createdDate": "2026-01-29T08:49:37.768Z",
     "notes": "Generated notes for Peter Anderson"
@@ -1292,7 +1292,7 @@
     "email": "quinn.martin@hotmail.com",
     "phone": "+1 (220) 965-5789",
     "company": "Globex",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-04-28T08:49:37.768Z",
     "createdDate": "2026-02-17T08:49:37.768Z",
     "notes": "Generated notes for Quinn Martin"
@@ -1325,7 +1325,7 @@
     "email": "noah.thomas@company.com",
     "phone": "+1 (580) 621-4148",
     "company": "Soylent Corp",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-11T08:49:37.768Z",
     "createdDate": "2026-02-03T08:49:37.768Z",
     "notes": "Generated notes for Noah Thomas"
@@ -1347,7 +1347,7 @@
     "email": "wendy.gonzalez@example.com",
     "phone": "+1 (367) 370-4198",
     "company": "Initech",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-22T08:49:37.768Z",
     "createdDate": "2026-02-16T08:49:37.768Z",
     "notes": "Generated notes for Wendy Gonzalez"
@@ -1369,7 +1369,7 @@
     "email": "karen.martinez@yahoo.com",
     "phone": "+1 (400) 623-4032",
     "company": "Hooli",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-06T08:49:37.768Z",
     "createdDate": "2025-11-04T08:49:37.768Z",
     "notes": "Generated notes for Karen Martinez"
@@ -1391,7 +1391,7 @@
     "email": "alice.davis@yahoo.com",
     "phone": "+1 (914) 428-4944",
     "company": "Umbrella Corp",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-06T08:49:37.768Z",
     "createdDate": "2026-02-17T08:49:37.768Z",
     "notes": "Generated notes for Alice Davis"
@@ -1402,7 +1402,7 @@
     "email": "eve.smith@yahoo.com",
     "phone": "+1 (271) 466-7092",
     "company": "Acme Corp",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-06-15T08:49:37.768Z",
     "createdDate": "2026-02-05T08:49:37.768Z",
     "notes": "Generated notes for Eve Smith"
@@ -1457,7 +1457,7 @@
     "email": "mia.brown@gmail.com",
     "phone": "+1 (982) 328-4163",
     "company": "Globex",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-05-05T08:49:37.768Z",
     "createdDate": "2025-10-30T08:49:37.768Z",
     "notes": "Generated notes for Mia Brown"
@@ -1490,7 +1490,7 @@
     "email": "alice.miller@example.com",
     "phone": "+1 (802) 889-5299",
     "company": "Aperture Science",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-22T08:49:37.769Z",
     "createdDate": "2025-11-01T08:49:37.769Z",
     "notes": "Generated notes for Alice Miller"
@@ -1501,7 +1501,7 @@
     "email": "isabella.garcia@gmail.com",
     "phone": "+1 (631) 739-1453",
     "company": "Dunder Mifflin",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-13T08:49:37.769Z",
     "createdDate": "2025-11-28T08:49:37.769Z",
     "notes": "Generated notes for Isabella Garcia"
@@ -1523,7 +1523,7 @@
     "email": "jack.brown@example.com",
     "phone": "+1 (769) 202-3977",
     "company": "Stark Industries",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-05-27T08:49:37.769Z",
     "createdDate": "2026-01-18T08:49:37.769Z",
     "notes": "Generated notes for Jack Brown"
@@ -1534,7 +1534,7 @@
     "email": "peter.smith@company.com",
     "phone": "+1 (421) 902-6810",
     "company": "Dunder Mifflin",
-    "status": "Active Customer",
+    "status": "Active",
     "lastContact": "2026-06-24T08:49:37.769Z",
     "createdDate": "2026-01-19T08:49:37.769Z",
     "notes": "Generated notes for Peter Smith"
@@ -1589,7 +1589,7 @@
     "email": "rachel.smith@yahoo.com",
     "phone": "+1 (849) 372-3182",
     "company": "Globex",
-    "status": "Inactive Customer",
+    "status": "Inactive",
     "lastContact": "2026-07-27T08:49:37.769Z",
     "createdDate": "2025-10-30T08:49:37.769Z",
     "notes": "Generated notes for Rachel Smith"

@@ -15,7 +15,7 @@ export default function MobileSidebar() {
     return `flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm transition-colors ${
       isActive
         ? 'bg-blue-500/10 text-blue-500'
-        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
     }`;
   };
 
@@ -32,7 +32,7 @@ export default function MobileSidebar() {
   return (
     <>
       <button 
-        className="md:hidden p-2 -ml-2 text-slate-400 hover:text-slate-200 focus:outline-none" 
+        className="md:hidden p-2 -ml-2 text-muted-foreground hover:text-foreground focus:outline-none" 
         onClick={() => setIsOpen(true)}
         aria-label="Open menu"
       >
@@ -41,23 +41,21 @@ export default function MobileSidebar() {
       
       {isOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
-          {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-[#0a0f1c]/80 backdrop-blur-sm" 
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm" 
             onClick={() => setIsOpen(false)} 
             aria-hidden="true"
           />
           
-          {/* Sidebar Drawer */}
-          <div className="relative w-64 bg-[#0a0f1c] border-r border-slate-800/60 h-full flex flex-col shadow-2xl">
-            <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800/60">
+          <div className="relative w-64 bg-background border-r border-border h-full flex flex-col shadow-2xl">
+            <div className="h-16 flex items-center justify-between px-6 border-b border-border">
               <div className="flex items-center gap-3">
                 <CustomAvatar name="Alex R." fallback="AR" className="w-8 h-8 rounded-full" />
-                <span className="text-slate-100 font-semibold text-sm">Alex R.</span>
+                <span className="text-foreground font-semibold text-sm">Alex R.</span>
               </div>
               <button 
                 onClick={() => setIsOpen(false)} 
-                className="text-slate-400 hover:text-white p-1"
+                className="text-muted-foreground hover:text-foreground p-1"
                 aria-label="Close menu"
               >
                 <X size={20} />

@@ -16,7 +16,7 @@ export default function CustomAvatar({ src, alt, fallback, name, className }: Cu
   return (
     <Avatar className={className}>
       <AvatarImage src={avatarSrc} alt={alt || seed} />
-      <AvatarFallback className="bg-blue-600 text-white font-bold">{fallback}</AvatarFallback>
+      <AvatarFallback className="bg-blue-600 text-foreground font-bold">{fallback}</AvatarFallback>
     </Avatar>
   );
 }

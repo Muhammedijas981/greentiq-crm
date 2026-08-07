@@ -47,21 +47,21 @@ function SortableItem({ filter, onApply, isActive }: SortableItemProps) {
   };
 
   return (
-    <li ref={setNodeRef} style={style} className={`relative group flex items-center justify-between rounded-lg transition-colors ${isActive ? 'bg-[#1e293b]' : 'hover:bg-slate-800/50'}`}>
+    <li ref={setNodeRef} style={style} className={`relative group flex items-center justify-between rounded-lg transition-colors ${isActive ? 'bg-muted' : 'hover:bg-muted/50'}`}>
       <button 
         {...attributes} 
         {...listeners} 
-        className={`p-2 cursor-grab active:cursor-grabbing ${isActive ? 'text-slate-400' : 'text-slate-500 hover:text-slate-300'}`}
+        className={`p-2 cursor-grab active:cursor-grabbing ${isActive ? 'text-muted-foreground' : 'text-muted-foreground hover:text-muted-foreground'}`}
       >
         <GripVertical size={14} />
       </button>
       
       <button 
         onClick={() => onApply(filter.state)}
-        className={`flex-1 flex items-center justify-between px-2 py-2 text-sm ${isActive ? 'text-slate-100 font-medium' : 'text-slate-300 hover:text-slate-100'}`}
+        className={`flex-1 flex items-center justify-between px-2 py-2 text-sm ${isActive ? 'text-foreground font-medium' : 'text-muted-foreground hover:text-foreground'}`}
       >
         <span>{filter.name}</span>
-        {!filter.isTemplate && <Star size={14} fill="currentColor" className={isActive ? 'text-blue-400' : 'text-slate-500 group-hover:text-blue-400'} />}
+        {!filter.isTemplate && <Star size={14} fill="currentColor" className={isActive ? 'text-blue-400' : 'text-muted-foreground group-hover:text-blue-400'} />}
       </button>
     </li>
   );

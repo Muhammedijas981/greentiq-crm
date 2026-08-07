@@ -3,10 +3,10 @@ import { SavedFilter, FilterState } from '@/types/filter';
 const defaultTemplates: SavedFilter[] = [
   {
     id: 'template-1',
-    name: 'Active Customers',
+    name: 'Actives',
     isTemplate: true,
     state: {
-      status: ['Active Customer'],
+      status: ['Active'],
       company: [],
       dateRange: { from: '', to: '' },
       phone: '',
@@ -41,6 +41,18 @@ const defaultTemplates: SavedFilter[] = [
         // older than 90 days
         to: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] 
       },
+      phone: '',
+      email: ''
+    }
+  },
+  {
+    id: 'template-4',
+    name: 'Inactives',
+    isTemplate: true,
+    state: {
+      status: ['Inactive'],
+      company: [],
+      dateRange: { from: '', to: '' },
       phone: '',
       email: ''
     }

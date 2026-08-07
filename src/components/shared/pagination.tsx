@@ -29,15 +29,15 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
 
   return (
     <div className="flex items-center justify-between mt-6">
-      <div className="text-sm text-slate-400 hidden sm:block">
+      <div className="text-sm text-muted-foreground hidden sm:block">
         Showing page {currentPage} of {totalPages || 1}
       </div>
       
-      <div className="flex items-center gap-1 bg-[#1e293b] p-1 rounded-lg border border-slate-800">
+      <div className="flex items-center gap-1 bg-muted p-1 rounded-lg border border-border">
         <button 
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/80 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronLeft size={16} />
           <span className="hidden sm:inline">Previous</span>
@@ -46,15 +46,15 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <div className="flex items-center gap-1 px-2">
           {getPageNumbers().map((page, index) => (
             page === '...' ? (
-              <MoreHorizontal key={`ellipsis-${index}`} size={16} className="text-slate-500 mx-1" />
+              <MoreHorizontal key={`ellipsis-${index}`} size={16} className="text-muted-foreground mx-1" />
             ) : (
               <button
                 key={`page-${page}`}
                 onClick={() => onPageChange(page as number)}
                 className={`w-8 h-8 flex items-center justify-center rounded-md text-sm font-medium transition-colors ${
                   currentPage === page 
-                    ? 'bg-blue-600 text-white shadow-sm' 
-                    : 'text-slate-400 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-blue-600 text-foreground shadow-sm' 
+                    : 'text-muted-foreground hover:bg-muted/80 hover:text-foreground'
                 }`}
               >
                 {page}
@@ -66,7 +66,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         <button 
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages || totalPages === 0}
-          className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-700 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/80 rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <span className="hidden sm:inline">Next</span>
           <ChevronRight size={16} />

@@ -71,6 +71,24 @@ export const apiClient = {
     if (!response.ok) throw new Error('Failed to delete customer');
   },
 
+  bulkUpdateCustomers: async (ids: string[], data: Partial<Customer>): Promise<void> => {
+    const response = await fetch('/api/customers/bulk-update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids, data }),
+    });
+    if (!response.ok) throw new Error('Failed to bulk update customers');
+  },
+
+  bulkDeleteCustomers: async (ids: string[]): Promise<void> => {
+    const response = await fetch('/api/customers/bulk-delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids }),
+    });
+    if (!response.ok) throw new Error('Failed to bulk delete customers');
+  },
+
   // Saved Filters
   getSavedFilters: async (): Promise<SavedFilter[]> => {
     const response = await fetch('/api/saved-filters');
