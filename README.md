@@ -375,21 +375,6 @@ Each deployment is isolated and serves as a distinct environment for testing and
 
 ---
 
-## Future Enhancements
-
-If this project were to grow beyond the assessment:
-
-1. **Real Database** – Migrate from mock store to PostgreSQL + Prisma for persistent, multi-instance state.
-2. **Authentication** – Integrate OAuth2 (Google, GitHub) or email/password with session management.
-3. **Role-Based Access Control** – Admin, manager, rep roles with permission-based visibility.
-4. **Advanced Filtering UI** – Date pickers, multi-select dropdowns, saved filter editing.
-5. **Email Sync** – Pull customer emails from Gmail/Outlook, log communication history.
-6. **Analytics Dashboard** – Charts (Revenue over time, pipeline by stage), forecast models.
-7. **Automated Testing** – Playwright for E2E, Vitest for unit tests.
-8. **API Documentation** – OpenAPI/Swagger spec for the `/api/*` routes.
-
----
-
 ## License
 
 This project is a Greentiq assessment submission. All rights reserved.
