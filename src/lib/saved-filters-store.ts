@@ -44,6 +44,18 @@ const defaultTemplates: SavedFilter[] = [
       phone: '',
       email: ''
     }
+  },
+  {
+    id: 'template-4',
+    name: 'Inactives',
+    isTemplate: true,
+    state: {
+      status: ['Inactive'],
+      company: [],
+      dateRange: { from: '', to: '' },
+      phone: '',
+      email: ''
+    }
   }
 ];
 
