@@ -41,19 +41,19 @@ function QuickSelect({ value, options, onChange }: { value: string, options: {va
     <div className="relative" ref={ref}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 h-9 bg-[#151a2a] border border-slate-700/50 text-slate-300 text-sm rounded-md px-3 outline-none focus:border-blue-500 hover:bg-slate-800/50 transition-colors"
+        className="flex items-center gap-2 h-9 bg-card border border-border text-muted-foreground text-sm rounded-md px-3 outline-none focus:border-blue-500 hover:bg-muted/50 transition-colors"
       >
         {selectedLabel}
-        <ChevronDown size={14} className="text-slate-400" />
+        <ChevronDown size={14} className="text-muted-foreground" />
       </button>
       {isOpen && (
-        <div className="absolute top-full mt-1 left-0 z-50 w-48 bg-[#0f1423] border border-slate-700 rounded-md shadow-lg py-1">
+        <div className="absolute top-full mt-1 left-0 z-50 w-48 bg-card border border-border rounded-md shadow-lg py-1">
           {options.map(opt => (
             <button
               key={opt.value}
               disabled={opt.disabled}
               onClick={() => { onChange(opt.value); setIsOpen(false); }}
-              className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between ${opt.disabled ? 'text-slate-500 cursor-not-allowed' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`}
+              className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between ${opt.disabled ? 'text-muted-foreground cursor-not-allowed' : 'text-muted-foreground hover:bg-muted hover:text-foreground'}`}
             >
               {opt.label}
               {value === opt.value && !opt.disabled && <Check size={14} className="text-blue-500" />}
@@ -164,7 +164,7 @@ export default function CustomersPage() {
         title="Customers" 
         action={
           <div className="flex items-center gap-3">
-            <Button variant="outline" onClick={handleExportCSV} className="gap-2 text-slate-300 border-slate-700 hover:bg-slate-800">
+            <Button variant="outline" onClick={handleExportCSV} className="gap-2 text-muted-foreground border-border hover:bg-muted">
               <Download size={16} />
               <span className="hidden sm:inline">Export CSV</span>
             </Button>
@@ -176,16 +176,16 @@ export default function CustomersPage() {
         }
       />
       
-      <div className="bg-[#151a2a] border border-slate-800/60 rounded-xl p-4 md:p-6 shadow-sm mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between relative">
+      <div className="bg-card border border-border rounded-xl p-4 md:p-6 shadow-sm mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between relative">
         {selectedIds.size > 0 && (
-          <div className="absolute inset-0 z-10 bg-slate-800 backdrop-blur-sm rounded-xl flex items-center justify-between px-4 md:px-6">
+          <div className="absolute inset-0 z-10 bg-muted backdrop-blur-sm rounded-xl flex items-center justify-between px-4 md:px-6">
             <div className="flex items-center gap-3">
-              <span className="text-slate-200 font-medium bg-slate-700/50 px-2 py-1 rounded-md border border-slate-600/50">
+              <span className="text-foreground font-medium bg-slate-700/50 px-2 py-1 rounded-md border border-border/50">
                 {selectedIds.size} Selected
               </span>
               <button 
                 onClick={clear}
-                className="text-sm text-slate-400 hover:text-white transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Clear
               </button>
@@ -195,10 +195,10 @@ export default function CustomersPage() {
                 value="Set Status"
                 options={[
                   { value: "Set Status", label: "Set Status...", disabled: true },
-                  { value: "Active Customer", label: "Active Customer" },
+                  { value: "Active", label: "Active" },
                   { value: "Prospect", label: "Prospect" },
                   { value: "Lead", label: "Lead" },
-                  { value: "Inactive Customer", label: "Inactive Customer" },
+                  { value: "Inactive", label: "Inactive" },
                   { value: "Archive", label: "Archive" }
                 ]}
                 onChange={(val) => {
@@ -232,10 +232,10 @@ export default function CustomersPage() {
             options={[
               { value: "All", label: "Status: All" },
               ...(filterState.status.length > 1 ? [{ value: "Multiple", label: "Multiple Selected", disabled: true }] : []),
-              { value: "Active Customer", label: "Active Customer" },
+              { value: "Active", label: "Active" },
               { value: "Prospect", label: "Prospect" },
               { value: "Lead", label: "Lead" },
-              { value: "Inactive Customer", label: "Inactive Customer" },
+              { value: "Inactive", label: "Inactive" },
               { value: "Archive", label: "Archive" }
             ]}
             onChange={(val) => {
@@ -267,11 +267,11 @@ export default function CustomersPage() {
             }}
           />
 
-          <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="h-9 border-slate-700 text-slate-300 hover:bg-slate-800 relative">
+          <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="h-9 border-border text-muted-foreground hover:bg-muted relative">
             <Filter size={16} className="mr-2" />
             Filters
             {activeFilterCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-blue-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md border-2 border-[#151a2a]">
+              <span className="absolute -top-2 -right-2 bg-blue-600 text-foreground text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow-md border-2 border-[#151a2a]">
                 {activeFilterCount}
               </span>
             )}

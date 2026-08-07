@@ -7,8 +7,8 @@ interface StatusBadgeProps {
 }
 
 export default function StatusBadge({ status }: StatusBadgeProps) {
-  let bgColor = 'bg-slate-800';
-  let textColor = 'text-slate-300';
+  let bgColor = 'bg-muted';
+  let textColor = 'text-muted-foreground';
 
   const s = status.toLowerCase();
   if (s.includes('active') && !s.includes('inactive')) {

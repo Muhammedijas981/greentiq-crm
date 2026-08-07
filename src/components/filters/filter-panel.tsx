@@ -45,14 +45,14 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
   };
 
   return (
-    <div className="w-full md:w-[320px] lg:w-[380px] bg-[#0f1423] border-l border-slate-800/60 h-full flex flex-col text-slate-200 shadow-2xl">
+    <div className="w-full md:w-[320px] lg:w-[380px] bg-card border-l border-border h-full flex flex-col text-foreground shadow-2xl">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-slate-800/60">
+      <div className="flex items-center justify-between p-4 border-b border-border">
         <div className="flex items-center gap-2">
-          <Search size={18} className="text-slate-400" />
-          <h2 className="text-lg font-semibold text-slate-100">Filters</h2>
+          <Search size={18} className="text-muted-foreground" />
+          <h2 className="text-lg font-semibold text-foreground">Filters</h2>
         </div>
-        <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+        <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
           <X size={20} />
         </button>
       </div>
@@ -67,12 +67,12 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
                 placeholder="Filter Name..."
                 value={saveName}
                 onChange={(e) => setSaveName(e.target.value)}
-                className="flex-1 bg-[#151a2a] border border-slate-700/50 rounded-md px-3 text-sm text-slate-300 focus:outline-none focus:border-blue-500"
+                className="flex-1 bg-card border border-border rounded-md px-3 text-sm text-muted-foreground focus:outline-none focus:border-blue-500"
               />
               <Button size="sm" onClick={handleSaveFilter} disabled={!saveName.trim() || saveMutation.isPending} className="bg-blue-600 hover:bg-blue-700 text-white">
                 Save
               </Button>
-              <Button size="sm" variant="outline" onClick={() => setIsSaving(false)} className="border-slate-700 text-slate-300">
+              <Button size="sm" variant="outline" onClick={() => setIsSaving(false)} className="border-border text-muted-foreground">
                 Cancel
               </Button>
             </div>
@@ -80,7 +80,7 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
             <Button 
               variant="outline" 
               onClick={() => setIsSaving(true)}
-              className="w-full justify-center bg-transparent border-slate-700 hover:bg-slate-800 hover:text-white text-slate-300 gap-2"
+              className="w-full justify-center bg-transparent border-border hover:bg-muted hover:text-foreground text-muted-foreground gap-2"
             >
               <Save size={14} />
               Save Current Filter
@@ -90,7 +90,7 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
 
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider">Criteria</h3>
+            <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">Criteria</h3>
             <button 
               onClick={() => {
                 localDispatch({ type: 'CLEAR_ALL' });
@@ -143,8 +143,8 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
         </div>
 
         {/* Saved Filters */}
-        <div className="space-y-3 pt-4 border-t border-slate-800/60">
-          <h3 className="text-sm font-semibold text-slate-200">Saved Filters</h3>
+        <div className="space-y-3 pt-4 border-t border-border">
+          <h3 className="text-sm font-semibold text-foreground">Saved Filters</h3>
           <SavedFiltersList 
             filters={savedFilters} 
             onApply={(savedState) => localDispatch({ type: 'APPLY_SAVED_FILTER', payload: savedState })}

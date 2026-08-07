@@ -20,16 +20,16 @@ export default function StatCard({
   iconColor
 }: StatCardProps) {
   return (
-    <div className="bg-[#151a2a] border border-slate-800/60 rounded-2xl p-6 flex flex-col flex-1 shadow-sm">
+    <div className="bg-card border border-border rounded-2xl p-6 flex flex-col flex-1 shadow-sm">
       <div className="flex items-center gap-4 mb-5">
         <div className={`w-10 h-10 rounded flex items-center justify-center ${iconBg} ${iconColor}`}>
           {icon}
         </div>
-        <span className="text-3xl font-semibold text-slate-100">{value}</span>
+        <span className="text-3xl font-semibold text-foreground">{value}</span>
       </div>
-      <div className="text-slate-400 text-sm mb-2">{title}</div>
+      <div className="text-muted-foreground text-sm mb-2">{title}</div>
       {trend && trendUp !== undefined && (
-        <div className="text-slate-500 text-xs flex items-center gap-1">
+        <div className="text-muted-foreground text-xs flex items-center gap-1">
           Trend <span className={trendUp ? 'text-emerald-500' : 'text-red-500'}>{trend} {trendUp ? '↑ Green' : '↓ Red'}</span>
         </div>
       )}

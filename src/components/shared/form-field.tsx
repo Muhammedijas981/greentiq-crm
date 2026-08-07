@@ -27,7 +27,7 @@ export default function FormField<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-slate-300">{label}</FormLabel>
+          <FormLabel className="text-muted-foreground">{label}</FormLabel>
           <FormControl>
             {children(field)}
           </FormControl>

@@ -10,7 +10,7 @@ export default function LoadingSkeleton({ type, count = 1 }: LoadingSkeletonProp
     return (
       <div className="flex flex-col md:flex-row gap-6 w-full">
         {Array.from({ length: count }).map((_, i) => (
-          <Skeleton key={i} className="h-32 w-full rounded-2xl bg-[#1e293b]" />
+          <Skeleton key={i} className="h-32 w-full rounded-2xl bg-muted" />
         ))}
       </div>
     );
@@ -20,7 +20,7 @@ export default function LoadingSkeleton({ type, count = 1 }: LoadingSkeletonProp
     return (
       <div className="w-full space-y-4">
         {Array.from({ length: count }).map((_, i) => (
-          <Skeleton key={i} className="h-16 w-full bg-[#1e293b]" />
+          <Skeleton key={i} className="h-16 w-full bg-muted" />
         ))}
       </div>
     );
@@ -30,8 +30,8 @@ export default function LoadingSkeleton({ type, count = 1 }: LoadingSkeletonProp
     <div className="space-y-6">
       {Array.from({ length: count }).map((_, i) => (
         <div key={i} className="space-y-2">
-          <Skeleton className="h-4 w-1/4 bg-[#1e293b]" />
-          <Skeleton className="h-10 w-full bg-[#1e293b]" />
+          <Skeleton className="h-4 w-1/4 bg-muted" />
+          <Skeleton className="h-10 w-full bg-muted" />
         </div>
       ))}
     </div>

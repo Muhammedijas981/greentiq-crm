@@ -14,15 +14,15 @@ export default function Sidebar() {
     return `flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm transition-colors ${
       isActive
         ? 'bg-blue-500/10 text-blue-500'
-        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
     }`;
   };
   return (
-    <aside className="w-64 bg-[#0a0f1c] border-r border-slate-800/60 hidden md:flex flex-col flex-shrink-0 h-screen sticky top-0">
-      <div className="h-16 flex items-center px-6 border-b border-slate-800/60">
+    <aside className="w-64 bg-background border-r border-border hidden md:flex flex-col flex-shrink-0 h-screen sticky top-0">
+      <div className="h-16 flex items-center px-6 border-b border-border">
         <div className="flex items-center gap-3">
           <CustomAvatar name="Alex R." fallback="AR" className="w-8 h-8 rounded-full" />
-          <span className="text-slate-100 font-semibold text-sm">Alex R.</span>
+          <span className="text-foreground font-semibold text-sm">Alex R.</span>
         </div>
       </div>
       <nav className="flex-1 py-6 px-3 flex flex-col gap-2">

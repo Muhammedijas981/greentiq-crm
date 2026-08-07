@@ -3,10 +3,10 @@ import { SavedFilter, FilterState } from '@/types/filter';
 const defaultTemplates: SavedFilter[] = [
   {
     id: 'template-1',
-    name: 'Active Customers',
+    name: 'Actives',
     isTemplate: true,
     state: {
-      status: ['Active Customer'],
+      status: ['Active'],
       company: [],
       dateRange: { from: '', to: '' },
       phone: '',
