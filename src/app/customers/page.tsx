@@ -6,7 +6,7 @@ import CustomerTable from '@/components/customers/customer-table';
 import CustomerCard from '@/components/customers/customer-card';
 import { Customer } from '@/types/customer';
 import { Button } from '@/components/ui/button';
-import { Plus, Filter, ChevronDown, Check, Trash2 } from 'lucide-react';
+import { Plus, Filter, ChevronDown, Check, Trash2, Download } from 'lucide-react';
 import SearchBar from '@/components/layout/search-bar';
 import Pagination from '@/components/shared/pagination';
 import { useState, useEffect, useRef } from 'react';
@@ -146,15 +146,33 @@ export default function CustomersPage() {
     }
   };
 
+  const handleExportCSV = () => {
+    const searchParams = new URLSearchParams();
+    if (debouncedSearch) searchParams.set('search', debouncedSearch);
+    if (debouncedFilterState && Object.keys(debouncedFilterState).length > 0) {
+      searchParams.set('advancedFilters', JSON.stringify(debouncedFilterState));
+    }
+    if (sort) searchParams.set('sort', sort);
+    if (order) searchParams.set('order', order);
+    
+    window.location.href = `/api/customers/export?${searchParams.toString()}`;
+  };
+
   return (
     <div className="p-4 sm:p-6 md:p-8 max-w-7xl mx-auto">
       <PageHeader 
         title="Customers" 
         action={
-          <Button onClick={() => { setSelectedCustomer(null); setIsAddOpen(true); }} className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
-            <Plus size={16} />
-            Add Customer
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" onClick={handleExportCSV} className="gap-2 text-slate-300 border-slate-700 hover:bg-slate-800">
+              <Download size={16} />
+              <span className="hidden sm:inline">Export CSV</span>
+            </Button>
+            <Button onClick={() => { setSelectedCustomer(null); setIsAddOpen(true); }} className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+              <Plus size={16} />
+              <span className="hidden sm:inline">Add Customer</span>
+            </Button>
+          </div>
         }
       />
       
