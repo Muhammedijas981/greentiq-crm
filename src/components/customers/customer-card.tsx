@@ -4,19 +4,36 @@ import React from 'react';
 import { Customer } from '@/types/customer';
 import StatusBadge from './status-badge';
 import CustomAvatar from '../shared/custom-avatar';
-import { Pencil, Trash2, Mail, Phone, Building2, Calendar } from 'lucide-react';
+import { Pencil, Trash2, Mail, Phone, Building2, Calendar, Check } from 'lucide-react';
 
 interface CustomerCardProps {
   customer: Customer;
   onEdit?: (customer: Customer) => void;
   onDelete?: (customer: Customer) => void;
+  isSelected?: boolean;
+  onToggleSelect?: (id: string) => void;
 }
 
-export default function CustomerCard({ customer, onEdit, onDelete }: CustomerCardProps) {
+export default function CustomerCard({ customer, onEdit, onDelete, isSelected = false, onToggleSelect }: CustomerCardProps) {
   return (
-    <div className="bg-[#151a2a] border border-slate-800/60 rounded-xl p-5 flex flex-col gap-4">
+    <div className={`bg-[#151a2a] border ${isSelected ? 'border-blue-500/50 bg-blue-900/10' : 'border-slate-800/60'} rounded-xl p-5 flex flex-col gap-4 relative transition-colors`}>
       <div className="flex items-start justify-between gap-4">
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-3">
+          <div className="mt-1" onClick={(e) => e.stopPropagation()}>
+            <div className="relative flex items-center justify-center w-4 h-4">
+              <input 
+                type="checkbox" 
+                className="absolute opacity-0 w-full h-full cursor-pointer z-10"
+                checked={isSelected}
+                onChange={() => onToggleSelect?.(customer.id)}
+              />
+              <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
+                isSelected ? 'bg-blue-600 border-blue-600' : 'bg-transparent border-slate-500'
+              }`}>
+                {isSelected && <Check size={10} className="text-white" strokeWidth={3} />}
+              </div>
+            </div>
+          </div>
           <CustomAvatar 
             name={customer.name}
             fallback={customer.name.substring(0, 2).toUpperCase()} 

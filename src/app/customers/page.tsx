@@ -6,7 +6,7 @@ import CustomerTable from '@/components/customers/customer-table';
 import CustomerCard from '@/components/customers/customer-card';
 import { Customer } from '@/types/customer';
 import { Button } from '@/components/ui/button';
-import { Plus, Filter, ChevronDown, Check } from 'lucide-react';
+import { Plus, Filter, ChevronDown, Check, Trash2 } from 'lucide-react';
 import SearchBar from '@/components/layout/search-bar';
 import Pagination from '@/components/shared/pagination';
 import { useState, useEffect, useRef } from 'react';
@@ -18,6 +18,11 @@ import { useCustomers } from '@/hooks/use-customers';
 import { useDebounce } from '@/hooks/use-debounce';
 import LoadingSkeleton from '@/components/shared/loading-skeleton';
 import EmptyState from '@/components/shared/empty-state';
+import { useBulkSelection } from '@/hooks/use-bulk-selection';
+import ConfirmDialog from '@/components/shared/confirm-dialog';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiClient } from '@/lib/api-client';
+import { toast } from 'sonner';
 
 function QuickSelect({ value, options, onChange }: { value: string, options: {value: string, label: string, disabled?: boolean}[], onChange: (val: string) => void }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -98,6 +103,35 @@ export default function CustomersPage() {
     limit,
   });
 
+  const { selectedIds, toggle, selectAll, clear } = useBulkSelection();
+  const [isBulkDeleteOpen, setIsBulkDeleteOpen] = useState(false);
+  const queryClient = useQueryClient();
+
+  const bulkUpdateMutation = useMutation({
+    mutationFn: (args: { ids: string[]; data: Partial<Customer> }) => apiClient.bulkUpdateCustomers(args.ids, args.data),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['customers'] });
+      clear();
+      toast.success(`${variables.ids.length} customer${variables.ids.length === 1 ? '' : 's'} updated successfully`);
+    },
+    onError: (err) => toast.error(err.message || 'Failed to update customers')
+  });
+
+  const bulkDeleteMutation = useMutation({
+    mutationFn: (ids: string[]) => apiClient.bulkDeleteCustomers(ids),
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['customers'] });
+      clear();
+      setIsBulkDeleteOpen(false);
+      toast.success(`${variables.length} customer${variables.length === 1 ? '' : 's'} deleted successfully`);
+    },
+    onError: (err) => {
+      toast.error(err.message || 'Failed to delete customers');
+      setIsBulkDeleteOpen(false);
+    }
+  });
+
+
   const handleSearchChange = (val: string) => {
     setSearch(val);
   };
@@ -124,7 +158,49 @@ export default function CustomersPage() {
         }
       />
       
-      <div className="bg-[#151a2a] border border-slate-800/60 rounded-xl p-4 md:p-6 shadow-sm mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+      <div className="bg-[#151a2a] border border-slate-800/60 rounded-xl p-4 md:p-6 shadow-sm mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between relative">
+        {selectedIds.size > 0 && (
+          <div className="absolute inset-0 z-10 bg-slate-800 backdrop-blur-sm rounded-xl flex items-center justify-between px-4 md:px-6">
+            <div className="flex items-center gap-3">
+              <span className="text-slate-200 font-medium bg-slate-700/50 px-2 py-1 rounded-md border border-slate-600/50">
+                {selectedIds.size} Selected
+              </span>
+              <button 
+                onClick={clear}
+                className="text-sm text-slate-400 hover:text-white transition-colors"
+              >
+                Clear
+              </button>
+            </div>
+            <div className="flex items-center gap-3">
+              <QuickSelect
+                value="Set Status"
+                options={[
+                  { value: "Set Status", label: "Set Status...", disabled: true },
+                  { value: "Active Customer", label: "Active Customer" },
+                  { value: "Prospect", label: "Prospect" },
+                  { value: "Lead", label: "Lead" },
+                  { value: "Inactive Customer", label: "Inactive Customer" },
+                  { value: "Archive", label: "Archive" }
+                ]}
+                onChange={(val) => {
+                  if (val !== "Set Status") {
+                    bulkUpdateMutation.mutate({ ids: Array.from(selectedIds), data: { status: val as any } });
+                  }
+                }}
+              />
+              <Button 
+                variant="destructive" 
+                size="sm" 
+                className="h-9 gap-2"
+                onClick={() => setIsBulkDeleteOpen(true)}
+              >
+                <Trash2 size={16} />
+                <span className="hidden sm:inline">Delete Selected</span>
+              </Button>
+            </div>
+          </div>
+        )}
         <SearchBar 
           value={search} 
           onChange={handleSearchChange} 
@@ -211,6 +287,9 @@ export default function CustomersPage() {
               sort={sort}
               order={order}
               onSort={handleSort}
+              selectedIds={selectedIds}
+              onToggleSelect={toggle}
+              onSelectAll={(select) => selectAll(data.data.map((c: Customer) => c.id), select)}
             />
           </div>
 
@@ -222,6 +301,8 @@ export default function CustomersPage() {
                   customer={customer} 
                   onEdit={(c) => { setSelectedCustomer(c || customer); setIsEditOpen(true); }} 
                   onDelete={(c) => { setSelectedCustomer(c || customer); setIsDetailOpen(true); }}
+                  isSelected={selectedIds.has(customer.id)}
+                  onToggleSelect={toggle}
                 />
               </div>
             ))}
@@ -265,6 +346,15 @@ export default function CustomersPage() {
           />
         </div>
       )}
+
+      <ConfirmDialog 
+        isOpen={isBulkDeleteOpen}
+        onOpenChange={setIsBulkDeleteOpen}
+        title="Delete Selected Customers"
+        description={`Are you sure you want to delete ${selectedIds.size} selected customer${selectedIds.size === 1 ? '' : 's'}? This action cannot be undone.`}
+        confirmLabel="Delete Customers"
+        onConfirm={() => bulkDeleteMutation.mutate(Array.from(selectedIds))}
+      />
     </div>
   );
 }

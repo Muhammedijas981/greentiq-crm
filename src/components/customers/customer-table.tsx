@@ -4,7 +4,7 @@ import React from 'react';
 import { Customer } from '@/types/customer';
 import StatusBadge from './status-badge';
 import CustomAvatar from '../shared/custom-avatar';
-import { Pencil, Trash2, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
+import { Pencil, Trash2, ArrowUp, ArrowDown, ArrowUpDown, Check } from 'lucide-react';
 
 interface CustomerTableProps {
   customers: Customer[];
@@ -14,9 +14,14 @@ interface CustomerTableProps {
   sort?: string;
   order?: 'asc' | 'desc';
   onSort?: (field: string) => void;
+  selectedIds?: Set<string>;
+  onToggleSelect?: (id: string) => void;
+  onSelectAll?: (select: boolean) => void;
 }
 
-export default function CustomerTable({ customers, onEdit, onDelete, onRowClick, sort, order, onSort }: CustomerTableProps) {
+export default function CustomerTable({ customers, onEdit, onDelete, onRowClick, sort, order, onSort, selectedIds = new Set(), onToggleSelect, onSelectAll }: CustomerTableProps) {
+  const allSelected = customers.length > 0 && customers.every(c => selectedIds.has(c.id));
+  
   const renderHeader = (field: string, label: string) => {
     const isSortable = ['name', 'email', 'lastContact'].includes(field);
     if (!isSortable) {
@@ -47,6 +52,21 @@ export default function CustomerTable({ customers, onEdit, onDelete, onRowClick,
         <table className="w-full text-sm text-left text-slate-300">
           <thead className="text-xs text-slate-400 bg-slate-900/50 uppercase border-b border-slate-800/60">
             <tr>
+              <th scope="col" className="px-6 py-4 w-10">
+                <div className="relative flex items-center justify-center w-4 h-4">
+                  <input 
+                    type="checkbox" 
+                    className="absolute opacity-0 w-full h-full cursor-pointer z-10"
+                    checked={allSelected}
+                    onChange={(e) => onSelectAll?.(e.target.checked)}
+                  />
+                  <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
+                    allSelected ? 'bg-blue-600 border-blue-600' : 'bg-transparent border-slate-500'
+                  }`}>
+                    {allSelected && <Check size={10} className="text-white" strokeWidth={3} />}
+                  </div>
+                </div>
+              </th>
               {renderHeader('name', 'Name')}
               {renderHeader('email', 'Email')}
               {renderHeader('phone', 'Phone')}
@@ -60,9 +80,24 @@ export default function CustomerTable({ customers, onEdit, onDelete, onRowClick,
             {customers.map((customer) => (
               <tr 
                 key={customer.id} 
-                className="hover:bg-slate-800/30 transition-colors cursor-pointer"
+                className={`hover:bg-slate-800/30 transition-colors cursor-pointer ${selectedIds.has(customer.id) ? 'bg-blue-900/10' : ''}`}
                 onClick={() => onRowClick?.(customer)}
               >
+                <td className="px-6 py-4 w-10" onClick={(e) => e.stopPropagation()}>
+                  <div className="relative flex items-center justify-center w-4 h-4">
+                    <input 
+                      type="checkbox" 
+                      className="absolute opacity-0 w-full h-full cursor-pointer z-10"
+                      checked={selectedIds.has(customer.id)}
+                      onChange={() => onToggleSelect?.(customer.id)}
+                    />
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
+                      selectedIds.has(customer.id) ? 'bg-blue-600 border-blue-600' : 'bg-transparent border-slate-500'
+                    }`}>
+                      {selectedIds.has(customer.id) && <Check size={10} className="text-white" strokeWidth={3} />}
+                    </div>
+                  </div>
+                </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
                     <CustomAvatar 
