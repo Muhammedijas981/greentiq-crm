@@ -6,21 +6,24 @@ import FilterCompany from './filter-company';
 import FilterDateRange from './filter-date-range';
 import FilterText from './filter-text';
 import SavedFiltersList from './saved-filters-list';
-import { FilterAction } from '@/hooks/use-filters';
+import { useFilters } from '@/hooks/use-filters';
 import { FilterState } from '@/types/filter';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api-client';
 
 interface FilterPanelProps {
   onClose?: () => void;
-  state: FilterState;
-  dispatch: React.Dispatch<FilterAction>;
+  initialState: FilterState;
+  onApply: (state: FilterState) => void;
+  onClear: () => void;
 }
 
-export default function FilterPanel({ onClose, state, dispatch }: FilterPanelProps) {
+export default function FilterPanel({ onClose, initialState, onApply, onClear }: FilterPanelProps) {
   const queryClient = useQueryClient();
   const [saveName, setSaveName] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  
+  const { state: localState, dispatch: localDispatch } = useFilters(initialState);
 
   const { data: savedFilters = [] } = useQuery({
     queryKey: ['saved-filters'],
@@ -28,7 +31,7 @@ export default function FilterPanel({ onClose, state, dispatch }: FilterPanelPro
   });
 
   const saveMutation = useMutation({
-    mutationFn: (name: string) => apiClient.createSavedFilter(name, state),
+    mutationFn: (name: string) => apiClient.createSavedFilter(name, localState),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['saved-filters'] });
       setIsSaving(false);
@@ -89,7 +92,10 @@ export default function FilterPanel({ onClose, state, dispatch }: FilterPanelPro
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-slate-100 uppercase tracking-wider">Criteria</h3>
             <button 
-              onClick={() => dispatch({ type: 'CLEAR_ALL' })}
+              onClick={() => {
+                localDispatch({ type: 'CLEAR_ALL' });
+                onClear();
+              }}
               className="text-xs text-blue-400 hover:text-blue-300"
             >
               Clear All
@@ -97,36 +103,43 @@ export default function FilterPanel({ onClose, state, dispatch }: FilterPanelPro
           </div>
 
           <FilterStatus 
-            selectedStatus={state.status} 
-            onChange={(s) => dispatch({ type: 'TOGGLE_STATUS', payload: s })} 
+            selectedStatus={localState.status} 
+            onChange={(s) => localDispatch({ type: 'TOGGLE_STATUS', payload: s })} 
           />
 
           <FilterCompany 
-            selectedCompanies={state.company} 
-            onChange={(c) => dispatch({ type: 'TOGGLE_COMPANY', payload: c })} 
+            selectedCompanies={localState.company} 
+            onChange={(c) => localDispatch({ type: 'TOGGLE_COMPANY', payload: c })} 
           />
 
           <FilterDateRange 
-            from={state.dateRange.from} 
-            to={state.dateRange.to} 
-            onChange={(r) => dispatch({ type: 'SET_DATE_RANGE', payload: r })} 
+            from={localState.dateRange.from} 
+            to={localState.dateRange.to} 
+            onChange={(r) => localDispatch({ type: 'SET_DATE_RANGE', payload: r })} 
           />
 
           <FilterText 
             label="Phone Number" 
             placeholder="(555) 123-4567" 
-            value={state.phone}
-            onChange={(p) => dispatch({ type: 'SET_PHONE', payload: p })}
+            value={localState.phone}
+            onChange={(p) => localDispatch({ type: 'SET_PHONE', payload: p })}
             icon={<Search size={14} />} 
           />
 
           <FilterText 
             label="Email Contains" 
             placeholder="e.g., @gmail.com" 
-            value={state.email}
-            onChange={(e) => dispatch({ type: 'SET_EMAIL', payload: e })}
+            value={localState.email}
+            onChange={(e) => localDispatch({ type: 'SET_EMAIL', payload: e })}
             icon={<span className="text-sm">@</span>} 
           />
+          
+          <Button 
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white mt-2"
+            onClick={() => onApply(localState)}
+          >
+            Apply Filters
+          </Button>
         </div>
 
         {/* Saved Filters */}
@@ -134,8 +147,8 @@ export default function FilterPanel({ onClose, state, dispatch }: FilterPanelPro
           <h3 className="text-sm font-semibold text-slate-200">Saved Filters</h3>
           <SavedFiltersList 
             filters={savedFilters} 
-            onApply={(state) => dispatch({ type: 'APPLY_SAVED_FILTER', payload: state })}
-            currentState={state}
+            onApply={(savedState) => localDispatch({ type: 'APPLY_SAVED_FILTER', payload: savedState })}
+            currentState={localState}
           />
         </div>
       </div>

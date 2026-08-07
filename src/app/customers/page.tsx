@@ -6,10 +6,10 @@ import CustomerTable from '@/components/customers/customer-table';
 import CustomerCard from '@/components/customers/customer-card';
 import { Customer } from '@/types/customer';
 import { Button } from '@/components/ui/button';
-import { Plus, Filter } from 'lucide-react';
+import { Plus, Filter, ChevronDown, Check } from 'lucide-react';
 import SearchBar from '@/components/layout/search-bar';
 import Pagination from '@/components/shared/pagination';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CustomerForm from '@/components/customers/customer-form';
 import CustomerDetailDrawer from '@/components/customers/customer-detail-drawer';
 import FilterPanel from '@/components/filters/filter-panel';
@@ -18,6 +18,47 @@ import { useCustomers } from '@/hooks/use-customers';
 import { useDebounce } from '@/hooks/use-debounce';
 import LoadingSkeleton from '@/components/shared/loading-skeleton';
 import EmptyState from '@/components/shared/empty-state';
+
+function QuickSelect({ value, options, onChange }: { value: string, options: {value: string, label: string, disabled?: boolean}[], onChange: (val: string) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedLabel = options.find(o => o.value === value)?.label || value;
+  
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 h-9 bg-[#151a2a] border border-slate-700/50 text-slate-300 text-sm rounded-md px-3 outline-none focus:border-blue-500 hover:bg-slate-800/50 transition-colors"
+      >
+        {selectedLabel}
+        <ChevronDown size={14} className="text-slate-400" />
+      </button>
+      {isOpen && (
+        <div className="absolute top-full mt-1 left-0 z-50 w-48 bg-[#0f1423] border border-slate-700 rounded-md shadow-lg py-1">
+          {options.map(opt => (
+            <button
+              key={opt.value}
+              disabled={opt.disabled}
+              onClick={() => { onChange(opt.value); setIsOpen(false); }}
+              className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between ${opt.disabled ? 'text-slate-500 cursor-not-allowed' : 'text-slate-300 hover:bg-slate-800 hover:text-white'}`}
+            >
+              {opt.label}
+              {value === opt.value && !opt.disabled && <Check size={14} className="text-blue-500" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // Dummy data for Phase 5 (will be removed in Phase 8)
 // Dummy data removed in Phase 7. Will be fetched via API in Phase 8.
@@ -90,8 +131,49 @@ export default function CustomersPage() {
           placeholder="Search customers..." 
           className="w-full sm:w-80" 
         />
-        <div className="flex gap-2 w-full sm:w-auto">
-          <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="border-slate-700 text-slate-300 hover:bg-slate-800 relative">
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          {/* Quick Filters */}
+          <QuickSelect
+            value={filterState.status.length === 1 ? filterState.status[0] : filterState.status.length > 1 ? "Multiple" : "All"}
+            options={[
+              { value: "All", label: "Status: All" },
+              ...(filterState.status.length > 1 ? [{ value: "Multiple", label: "Multiple Selected", disabled: true }] : []),
+              { value: "Active Customer", label: "Active Customer" },
+              { value: "Prospect", label: "Prospect" },
+              { value: "Lead", label: "Lead" },
+              { value: "Inactive Customer", label: "Inactive Customer" },
+              { value: "Archive", label: "Archive" }
+            ]}
+            onChange={(val) => {
+              if (val === "All" || val === "Multiple") {
+                filterDispatch({ type: 'SET_STATUS_EXACT', payload: [] });
+              } else {
+                filterDispatch({ type: 'SET_STATUS_EXACT', payload: [val] });
+              }
+            }}
+          />
+          
+          <QuickSelect
+            value={filterState.company.length === 1 ? filterState.company[0] : filterState.company.length > 1 ? "Multiple" : "All"}
+            options={[
+              { value: "All", label: "Company: All" },
+              ...(filterState.company.length > 1 ? [{ value: "Multiple", label: "Multiple Selected", disabled: true }] : []),
+              { value: "Acme Corp", label: "Acme Corp" },
+              { value: "Innovatech", label: "Innovatech" },
+              { value: "Globex", label: "Globex" },
+              { value: "Stark Industries", label: "Stark Industries" },
+              { value: "Wayne Enterprises", label: "Wayne Enterprises" }
+            ]}
+            onChange={(val) => {
+              if (val === "All" || val === "Multiple") {
+                filterDispatch({ type: 'SET_COMPANY_EXACT', payload: [] });
+              } else {
+                filterDispatch({ type: 'SET_COMPANY_EXACT', payload: [val] });
+              }
+            }}
+          />
+
+          <Button variant="outline" onClick={() => setIsFilterOpen(true)} className="h-9 border-slate-700 text-slate-300 hover:bg-slate-800 relative">
             <Filter size={16} className="mr-2" />
             Filters
             {activeFilterCount > 0 && (
@@ -172,8 +254,14 @@ export default function CustomersPage() {
         <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm">
           <FilterPanel 
             onClose={() => setIsFilterOpen(false)} 
-            state={filterState}
-            dispatch={filterDispatch}
+            initialState={filterState}
+            onApply={(newState) => {
+              filterDispatch({ type: 'APPLY_SAVED_FILTER', payload: newState });
+              setIsFilterOpen(false);
+            }}
+            onClear={() => {
+              filterDispatch({ type: 'CLEAR_ALL' });
+            }}
           />
         </div>
       )}
