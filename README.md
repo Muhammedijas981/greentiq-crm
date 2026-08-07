@@ -166,18 +166,6 @@ No formal issue tracker or pull request discussions were used; this was a focuse
 - ✅ **Loading States & Skeletons** for better UX
 - ✅ **Toast Notifications** (Sonner) for user feedback
 
-## What's Skipped ✗
-
-- ❌ **Real Database** – Uses in-memory mock store (acceptable for assessment, not production)
-- ❌ **Authentication & Authorization** – No login, no role-based access control
-- ❌ **Advanced Analytics** – No revenue forecasting, pipeline visualization, or AI insights
-- ❌ **Email Integration** – No automated email sending or message history
-- ❌ **Calendar/Scheduling** – No meeting scheduler or task management
-- ❌ **Custom Reports** – No report builder or BI integrations
-- ❌ **Webhook Support** – No Zapier, Make.com, or third-party integrations
-
-These are reasonable tradeoffs for a 48-hour assessment; the focus was on demonstrating clean architecture, intentional design decisions, and QA discipline.
-
 ## Running Locally
 
 ### Install & Start Dev Server
