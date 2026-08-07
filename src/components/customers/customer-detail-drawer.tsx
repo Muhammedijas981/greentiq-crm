@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Customer } from '@/types/customer';
 import { useDeleteCustomer } from '@/hooks/use-customer-mutations';
 import ConfirmDialog from '@/components/shared/confirm-dialog';
+import CustomAvatar from '@/components/shared/custom-avatar';
 import { toast } from 'sonner';
 
 interface CustomerDetailDrawerProps {
@@ -52,65 +53,66 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
 
   return (
     <>
-      <div className="fixed inset-0 z-40 flex justify-end bg-black/60 backdrop-blur-sm">
-        <div className="w-full max-w-[500px] bg-[#0a0f1c] border-l border-slate-800/60 h-full flex flex-col shadow-2xl">
+      <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+        <div className="w-full max-w-[480px] bg-[#151a2a] border border-slate-800 rounded-xl flex flex-col shadow-2xl my-auto">
           
           {/* Top bar */}
-          <div className="flex items-center justify-between p-4 border-b border-slate-800/60">
-            <h2 className="text-lg font-semibold text-slate-100">Customer Details</h2>
+          <div className="flex items-center justify-between px-5 py-3 border-b border-slate-800/60 bg-[#1e293b]/30 rounded-t-xl">
+            <h2 className="text-lg font-medium text-slate-100">Customer Details</h2>
             <button onClick={onClose} disabled={deleteMutation.isPending} className="text-slate-400 hover:text-white transition-colors">
               <X size={20} />
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+          <div className="flex-1 overflow-y-auto">
             
             {/* Header Profile Section */}
-            <div className="p-6 border-b border-slate-800/60 bg-[#151a2a]">
+            <div className="px-5 py-4 border-b border-slate-800/60 bg-[#151a2a]">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                <div className="flex gap-4">
-                  <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold shrink-0">
-                    {getInitials(customer.name)}
-                  </div>
+                <div className="flex gap-3">
+                  <CustomAvatar 
+                    name={customer.name}
+                    fallback={getInitials(customer.name)} 
+                    className="w-12 h-12 rounded-full text-lg shrink-0" 
+                  />
                   <div>
-                    <h1 className="text-xl font-semibold text-slate-100 leading-tight">{customer.name}</h1>
+                    <h1 className="text-lg font-semibold text-slate-100 leading-tight">{customer.name}</h1>
                     {customer.company && (
-                      <p className="text-sm font-medium text-slate-300 mt-2 flex items-center gap-1.5">
+                      <p className="text-sm font-medium text-slate-300 mt-1 flex items-center gap-1.5">
                         <span className="w-3 h-3 rounded bg-indigo-500/20 flex items-center justify-center text-[8px]">🏢</span> 
                         {customer.company}
                       </p>
                     )}
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 shrink-0">
                   <Button 
                     variant="outline" 
                     onClick={() => setIsConfirmOpen(true)}
                     disabled={deleteMutation.isPending}
-                    className="border-red-500/20 text-red-400 hover:bg-red-500/10 hover:text-red-300 h-9 px-3 bg-transparent"
+                    className="border-red-500/20 text-red-400 hover:bg-red-500/10 hover:text-red-300 h-8 text-sm px-3 bg-transparent"
                   >
-                    {deleteMutation.isPending ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                    {deleteMutation.isPending ? <Loader2 size={16} className="animate-spin" /> : 'Delete'}
                   </Button>
                   <Button 
                     onClick={onEdit} 
                     disabled={deleteMutation.isPending}
-                    className="bg-blue-600 hover:bg-blue-700 text-white h-9 px-3"
+                    className="bg-blue-600 hover:bg-blue-700 text-white h-8 text-sm px-3"
                   >
-                    <Edit2 size={16} className="mr-2" />
-                    Edit
+                    Edit Customer
                   </Button>
                 </div>
               </div>
             </div>
 
-            <div className="p-6 space-y-8">
+            <div className="px-5 py-4 space-y-5">
               
               {/* Info Columns */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Contact Information */}
-                <div className="space-y-5">
-                  <h3 className="text-sm font-semibold text-slate-100">Contact Information</h3>
-                  <div className="space-y-4">
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium text-slate-100">Contact Information</h3>
+                  <div className="space-y-3">
                     <div>
                       <span className="text-xs text-slate-500 block mb-1">Email</span>
                       <div className="flex items-center gap-2">
@@ -131,9 +133,9 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
                 </div>
 
                 {/* Company & Status */}
-                <div className="space-y-5">
-                  <h3 className="text-sm font-semibold text-slate-100">Details</h3>
-                  <div className="space-y-4">
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium text-slate-100">Details</h3>
+                  <div className="space-y-3">
                     <div>
                       <span className="text-xs text-slate-500 block mb-1">Status</span>
                       <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${getStatusColor(customer.status)}`}>
@@ -151,8 +153,8 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
               </div>
 
               {/* Timelines */}
-              <div className="space-y-4 border-t border-slate-800/60 pt-6">
-                <h3 className="text-sm font-semibold text-slate-100">Timelines</h3>
+              <div className="space-y-3 border-t border-slate-800/60 pt-4">
+                <h3 className="text-sm font-medium text-slate-100">Timelines</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <span className="text-xs text-slate-500 block mb-1">Last Contact</span>
@@ -167,9 +169,9 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
 
               {/* Notes */}
               {customer.notes && (
-                <div className="space-y-4 border-t border-slate-800/60 pt-6 pb-8">
-                  <h3 className="text-sm font-semibold text-slate-100">Notes</h3>
-                  <div className="bg-[#151a2a] border border-slate-800 rounded-lg p-4">
+                <div className="space-y-3 border-t border-slate-800/60 pt-4">
+                  <h3 className="text-sm font-medium text-slate-100">Notes</h3>
+                  <div className="bg-[#0a0f1c] border border-slate-800 rounded-lg p-3">
                     <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
                       {customer.notes}
                     </p>

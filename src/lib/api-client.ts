@@ -96,5 +96,11 @@ export const apiClient = {
     });
     if (!response.ok) throw new Error('Failed to reorder saved filters');
     return response.json();
+  },
+
+  async getDashboardStats() {
+    const response = await fetch('/api/customers/stats');
+    if (!response.ok) throw new Error('Failed to fetch dashboard stats');
+    return response.json();
   }
 };

@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 interface StatCardProps {
   title: string;
   value: string;
-  trend: string;
-  trendUp: boolean;
+  trend?: string;
+  trendUp?: boolean;
   icon: ReactNode;
   iconBg: string;
   iconColor: string;
@@ -28,9 +28,11 @@ export default function StatCard({
         <span className="text-3xl font-semibold text-slate-100">{value}</span>
       </div>
       <div className="text-slate-400 text-sm mb-2">{title}</div>
-      <div className="text-slate-500 text-xs flex items-center gap-1">
-        Trend <span className={trendUp ? 'text-emerald-500' : 'text-red-500'}>{trend} {trendUp ? '↑ Green' : '↓ Red'}</span>
-      </div>
+      {trend && trendUp !== undefined && (
+        <div className="text-slate-500 text-xs flex items-center gap-1">
+          Trend <span className={trendUp ? 'text-emerald-500' : 'text-red-500'}>{trend} {trendUp ? '↑ Green' : '↓ Red'}</span>
+        </div>
+      )}
     </div>
   );
 }

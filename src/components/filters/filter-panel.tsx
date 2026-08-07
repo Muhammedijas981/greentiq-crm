@@ -131,10 +131,11 @@ export default function FilterPanel({ onClose, state, dispatch }: FilterPanelPro
 
         {/* Saved Filters */}
         <div className="space-y-3 pt-4 border-t border-slate-800/60">
-          <h3 className="text-sm font-medium text-slate-100">Saved Filters</h3>
+          <h3 className="text-sm font-semibold text-slate-200">Saved Filters</h3>
           <SavedFiltersList 
             filters={savedFilters} 
             onApply={(state) => dispatch({ type: 'APPLY_SAVED_FILTER', payload: state })}
+            currentState={state}
           />
         </div>
       </div>

@@ -9,6 +9,24 @@ interface PaginationProps {
 }
 
 export default function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+  const getPageNumbers = () => {
+    const pages = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, '...', totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        pages.push(1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+      }
+    }
+    return pages;
+  };
+
   return (
     <div className="flex items-center justify-between mt-6">
       <div className="text-sm text-slate-400 hidden sm:block">
@@ -26,9 +44,23 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         </button>
         
         <div className="flex items-center gap-1 px-2">
-          <button className={`w-8 h-8 flex items-center justify-center rounded-md text-sm font-medium ${currentPage === 1 ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>1</button>
-          {totalPages > 3 && <MoreHorizontal size={16} className="text-slate-500" />}
-          {totalPages > 1 && <button className={`w-8 h-8 flex items-center justify-center rounded-md text-sm font-medium ${currentPage === totalPages ? 'bg-blue-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}>{totalPages}</button>}
+          {getPageNumbers().map((page, index) => (
+            page === '...' ? (
+              <MoreHorizontal key={`ellipsis-${index}`} size={16} className="text-slate-500 mx-1" />
+            ) : (
+              <button
+                key={`page-${page}`}
+                onClick={() => onPageChange(page as number)}
+                className={`w-8 h-8 flex items-center justify-center rounded-md text-sm font-medium transition-colors ${
+                  currentPage === page 
+                    ? 'bg-blue-600 text-white shadow-sm' 
+                    : 'text-slate-400 hover:bg-slate-700 hover:text-white'
+                }`}
+              >
+                {page}
+              </button>
+            )
+          ))}
         </div>
 
         <button 

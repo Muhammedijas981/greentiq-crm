@@ -37,10 +37,10 @@ export default function ConfirmDialog({
             {description}
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="mt-4 gap-2 sm:gap-0">
+        <DialogFooter className="mt-4 flex gap-3 sm:gap-3">
           <button
             onClick={() => onOpenChange(false)}
-            className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-colors"
+            className="h-8 px-3 text-sm font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 rounded-md transition-colors"
           >
             {cancelLabel}
           </button>
@@ -49,7 +49,7 @@ export default function ConfirmDialog({
               onConfirm();
               onOpenChange(false);
             }}
-            className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors ${
+            className={`h-8 px-3 text-sm font-medium text-white rounded-md transition-colors ${
               variant === 'danger' 
                 ? 'bg-red-600 hover:bg-red-700' 
                 : 'bg-blue-600 hover:bg-blue-700'

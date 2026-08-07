@@ -26,9 +26,10 @@ import { apiClient } from '@/lib/api-client';
 interface SortableItemProps {
   filter: SavedFilter;
   onApply: (state: any) => void;
+  isActive?: boolean;
 }
 
-function SortableItem({ filter, onApply }: SortableItemProps) {
+function SortableItem({ filter, onApply, isActive }: SortableItemProps) {
   const {
     attributes,
     listeners,
@@ -46,21 +47,21 @@ function SortableItem({ filter, onApply }: SortableItemProps) {
   };
 
   return (
-    <li ref={setNodeRef} style={style} className="relative group flex items-center justify-between rounded-lg hover:bg-slate-800/50 transition-colors">
+    <li ref={setNodeRef} style={style} className={`relative group flex items-center justify-between rounded-lg transition-colors ${isActive ? 'bg-[#1e293b]' : 'hover:bg-slate-800/50'}`}>
       <button 
         {...attributes} 
         {...listeners} 
-        className="p-2 cursor-grab active:cursor-grabbing text-slate-500 hover:text-slate-300"
+        className={`p-2 cursor-grab active:cursor-grabbing ${isActive ? 'text-slate-400' : 'text-slate-500 hover:text-slate-300'}`}
       >
         <GripVertical size={14} />
       </button>
       
       <button 
         onClick={() => onApply(filter.state)}
-        className="flex-1 flex items-center justify-between px-2 py-2 text-sm text-slate-300 hover:text-slate-100"
+        className={`flex-1 flex items-center justify-between px-2 py-2 text-sm ${isActive ? 'text-slate-100 font-medium' : 'text-slate-300 hover:text-slate-100'}`}
       >
         <span>{filter.name}</span>
-        {!filter.isTemplate && <Star size={14} className="text-slate-500 group-hover:text-blue-400" />}
+        {!filter.isTemplate && <Star size={14} fill="currentColor" className={isActive ? 'text-blue-400' : 'text-slate-500 group-hover:text-blue-400'} />}
       </button>
     </li>
   );
@@ -69,9 +70,10 @@ function SortableItem({ filter, onApply }: SortableItemProps) {
 interface SavedFiltersListProps {
   filters: SavedFilter[];
   onApply: (state: any) => void;
+  currentState?: any;
 }
 
-export default function SavedFiltersList({ filters, onApply }: SavedFiltersListProps) {
+export default function SavedFiltersList({ filters, onApply, currentState }: SavedFiltersListProps) {
   const [items, setItems] = useState<SavedFilter[]>(filters);
   const queryClient = useQueryClient();
 
@@ -119,6 +121,28 @@ export default function SavedFiltersList({ filters, onApply }: SavedFiltersListP
     }
   };
 
+  const isFilterActive = (filterState: any, current: any) => {
+    if (!current) return false;
+    try {
+      const s1 = [...(filterState.status || [])].sort();
+      const s2 = [...(current.status || [])].sort();
+      if (JSON.stringify(s1) !== JSON.stringify(s2)) return false;
+
+      const c1 = [...(filterState.company || [])].sort();
+      const c2 = [...(current.company || [])].sort();
+      if (JSON.stringify(c1) !== JSON.stringify(c2)) return false;
+
+      if (filterState.dateRange?.from !== current.dateRange?.from) return false;
+      if (filterState.dateRange?.to !== current.dateRange?.to) return false;
+      if (filterState.phone !== current.phone) return false;
+      if (filterState.email !== current.email) return false;
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+
   return (
     <DndContext 
       sensors={sensors}
@@ -135,6 +159,7 @@ export default function SavedFiltersList({ filters, onApply }: SavedFiltersListP
               key={filter.id} 
               filter={filter} 
               onApply={onApply} 
+              isActive={isFilterActive(filter.state, currentState)}
             />
           ))}
         </SortableContext>

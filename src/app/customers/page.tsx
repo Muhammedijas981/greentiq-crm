@@ -139,6 +139,7 @@ export default function CustomersPage() {
                 <CustomerCard 
                   customer={customer} 
                   onEdit={(c) => { setSelectedCustomer(c || customer); setIsEditOpen(true); }} 
+                  onDelete={(c) => { setSelectedCustomer(c || customer); setIsDetailOpen(true); }}
                 />
               </div>
             ))}

@@ -10,7 +10,7 @@ interface FilterDateRangeProps {
 export default function FilterDateRange({ from, to, onChange }: FilterDateRangeProps) {
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-medium text-slate-100">Date Range (Last Contact)</h3>
+      <h3 className="text-sm font-semibold text-slate-200">Date Range (Last Contact)</h3>
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1">
           <label className="text-xs text-slate-500">From</label>

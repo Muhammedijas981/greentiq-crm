@@ -17,9 +17,9 @@ export default function FilterStatus({ selectedStatus, onChange }: FilterStatusP
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-slate-100">Status</h3>
+        <h3 className="text-sm font-semibold text-slate-200">Status</h3>
       </div>
-      <div className="space-y-2">
+      <div className="space-y-1.5">
         {statusOptions.map((status) => {
           const checked = selectedStatus.includes(status.id);
           return (

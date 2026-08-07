@@ -11,7 +11,7 @@ interface FilterTextProps {
 export default function FilterText({ label, value, onChange, placeholder, icon }: FilterTextProps) {
   return (
     <div className="space-y-3">
-      <h3 className="text-sm font-medium text-slate-100">{label}</h3>
+      <h3 className="text-sm font-semibold text-slate-200">{label}</h3>
       <div className="relative">
         {icon && (
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 flex items-center justify-center">
