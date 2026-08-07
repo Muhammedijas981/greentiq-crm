@@ -1,6 +1,6 @@
 # Greentiq CRM – Advanced Customer Management Dashboard
 
-**Greentiq Innovations submission**: A full-featured customer relationship management (CRM) dashboard built with Next.js 16, TypeScript, React 19, and TanStack Query. Demonstrates modern state management patterns, advanced filtering with persistence, drag-and-drop reordering of saved filters, and a comprehensive mock API layer.
+**This is the assignment submission for [Greentiq](https://greentiq.com/)'s engineering assessment.** A full-featured customer relationship management (CRM) dashboard built with Next.js 16, TypeScript, React 19, and TanStack Query. Demonstrates modern state management patterns, advanced filtering with persistence, drag-and-drop reordering of saved filters, and a comprehensive mock API layer.
 
 ## Live Deployment
 
@@ -392,7 +392,7 @@ If this project were to grow beyond the assessment:
 
 ## License
 
-This project is a Greentiq Innovations assessment submission. All rights reserved.
+This project is a Greentiq assessment submission. All rights reserved.
 
 ---
 
