@@ -41,14 +41,12 @@ export default function MobileSidebar() {
       
       {isOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
-          {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-background/80 backdrop-blur-sm" 
             onClick={() => setIsOpen(false)} 
             aria-hidden="true"
           />
           
-          {/* Sidebar Drawer */}
           <div className="relative w-64 bg-background border-r border-border h-full flex flex-col shadow-2xl">
             <div className="h-16 flex items-center justify-between px-6 border-b border-border">
               <div className="flex items-center gap-3">

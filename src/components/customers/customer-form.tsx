@@ -58,7 +58,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
       <div className="w-full max-w-[480px] bg-card border border-border rounded-xl shadow-2xl flex flex-col my-auto">
-        {/* Header */}
         <div className="flex items-center justify-between px-5 py-3 border-b border-border">
           <h2 className="text-lg font-medium text-foreground">{mode === 'create' ? 'Add Customer' : 'Edit Customer'}</h2>
           <button onClick={onClose} disabled={isPending} className="text-muted-foreground hover:text-foreground transition-colors">
@@ -66,10 +65,8 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
           </button>
         </div>
 
-        {/* Body */}
         <form id="customer-form" onSubmit={handleSubmit(onSubmit)} className="px-5 py-4 space-y-3">
           
-          {/* Name */}
           <div className="space-y-1">
             <label className="text-sm text-muted-foreground">Name <span className="text-muted-foreground">*</span></label>
             <div className="relative">
@@ -83,7 +80,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
             {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
           </div>
 
-          {/* Email */}
           <div className="space-y-1">
             <label className="text-sm text-muted-foreground">Email <span className="text-muted-foreground">*</span></label>
             <div className="relative">
@@ -97,7 +93,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
             {errors.email && <p className="text-xs text-red-500">{errors.email.message}</p>}
           </div>
 
-          {/* Phone */}
           <div className="space-y-1">
             <label className="text-sm text-muted-foreground">Phone <span className="text-muted-foreground">*</span></label>
             <input 
@@ -108,7 +103,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
             {errors.phone && <p className="text-xs text-red-500">{errors.phone.message}</p>}
           </div>
 
-          {/* Company */}
           <div className="space-y-1">
             <label className="text-sm text-muted-foreground">Company <span className="text-muted-foreground">*</span></label>
             <input 
@@ -119,7 +113,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
             {errors.company && <p className="text-xs text-red-500">{errors.company.message}</p>}
           </div>
 
-          {/* Status & Date pair */}
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="space-y-1 flex-1">
               <label className="text-sm text-muted-foreground">Status</label>
@@ -152,7 +145,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
             </div>
           </div>
 
-          {/* Notes */}
           <div className="space-y-1">
             <label className="text-sm text-muted-foreground">Notes</label>
             <textarea 
@@ -165,7 +157,6 @@ export default function CustomerForm({ onClose, mode = 'create', initialData }: 
 
         </form>
 
-        {/* Footer */}
         <div className="flex items-center justify-end gap-3 px-5 py-3 border-t border-border bg-muted/30 rounded-b-xl">
           <Button variant="ghost" onClick={onClose} disabled={isPending} className="text-sm h-8 text-muted-foreground hover:text-foreground hover:bg-muted">
             Cancel

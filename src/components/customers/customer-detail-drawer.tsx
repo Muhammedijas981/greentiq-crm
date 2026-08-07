@@ -56,7 +56,6 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
       <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
         <div className="w-full max-w-[480px] bg-card border border-border rounded-xl flex flex-col shadow-2xl my-auto">
           
-          {/* Top bar */}
           <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/30 rounded-t-xl">
             <h2 className="text-lg font-medium text-foreground">Customer Details</h2>
             <button onClick={onClose} disabled={deleteMutation.isPending} className="text-muted-foreground hover:text-foreground transition-colors">
@@ -66,7 +65,6 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
 
           <div className="flex-1 overflow-y-auto">
             
-            {/* Header Profile Section */}
             <div className="px-5 py-4 border-b border-border bg-card">
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                 <div className="flex gap-3">
@@ -107,9 +105,7 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
 
             <div className="px-5 py-4 space-y-5">
               
-              {/* Info Columns */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Contact Information */}
                 <div className="space-y-3">
                   <h3 className="text-sm font-medium text-foreground">Contact Information</h3>
                   <div className="space-y-3">
@@ -132,7 +128,6 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
                   </div>
                 </div>
 
-                {/* Company & Status */}
                 <div className="space-y-3">
                   <h3 className="text-sm font-medium text-foreground">Details</h3>
                   <div className="space-y-3">
@@ -152,7 +147,6 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
                 </div>
               </div>
 
-              {/* Timelines */}
               <div className="space-y-3 border-t border-border pt-4">
                 <h3 className="text-sm font-medium text-foreground">Timelines</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -167,7 +161,6 @@ export default function CustomerDetailDrawer({ onClose, customer, onEdit }: Cust
                 </div>
               </div>
 
-              {/* Notes */}
               {customer.notes && (
                 <div className="space-y-3 border-t border-border pt-4">
                   <h3 className="text-sm font-medium text-foreground">Notes</h3>

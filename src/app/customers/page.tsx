@@ -241,7 +241,6 @@ export default function CustomersPage() {
           className="w-full sm:w-80" 
         />
         <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-          {/* Quick Filters */}
           <QuickSelect
             value={filterState.status.length === 1 ? filterState.status[0] : filterState.status.length > 1 ? "Multiple" : "All"}
             options={[
@@ -313,7 +312,6 @@ export default function CustomersPage() {
         />
       ) : (
         <>
-          {/* Desktop Table View */}
           <div className="hidden md:block">
             <CustomerTable 
               customers={data.data} 
@@ -329,7 +327,6 @@ export default function CustomersPage() {
             />
           </div>
 
-          {/* Mobile Card View */}
           <div className="md:hidden flex flex-col gap-4">
             {data.data.map((customer: Customer) => (
               <div key={customer.id} onClick={() => { setSelectedCustomer(customer); setIsDetailOpen(true); }}>

@@ -46,7 +46,6 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
 
   return (
     <div className="w-full md:w-[320px] lg:w-[380px] bg-card border-l border-border h-full flex flex-col text-foreground shadow-2xl">
-      {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-border">
         <div className="flex items-center gap-2">
           <Search size={18} className="text-muted-foreground" />
@@ -142,7 +141,6 @@ export default function FilterPanel({ onClose, initialState, onApply, onClear }:
           </Button>
         </div>
 
-        {/* Saved Filters */}
         <div className="space-y-3 pt-4 border-t border-border">
           <h3 className="text-sm font-semibold text-foreground">Saved Filters</h3>
           <SavedFiltersList 
